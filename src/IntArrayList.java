@@ -39,7 +39,7 @@ public class IntArrayList {
 	// ------------- Aufgabe 4 -----------------------
 	// wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 
-	private void checkSize(final int n) {  // für add / addAll
+	private void checkSize(final int n) { // für add / addAll
 		if ((this.size + n) > this.array.length) {
 			int al = this.array.length;
 			while ((this.size + n) > al) {
@@ -52,7 +52,7 @@ public class IntArrayList {
 			this.array = tmp;
 		}
 	}
-	
+
 	public void add(final int... values) {
 		checkSize(values.length);
 
@@ -76,17 +76,18 @@ public class IntArrayList {
 			}
 			this.size = i;
 		}
-	}	
+	}
 
-	public int remove(final int value) { 
-		int gefunden = 0; 		// das array wird um die anzahl der entferten elemte verkleinert / weglassen?
+	public int remove(final int value) {
+		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
+		int tmpSize = this.size; // aus reiner panik erstellt, um die for-schleifen nicht zu beeinflussen
 		for (int i = 0; i < this.size; i++) {
 			if (array[i] == value) {
 				gefunden++;
-				this.size--;
+				tmpSize--;
 			}
 		}
-		
+
 		int[] tmp = new int[this.array.length - gefunden];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (array[i] != value) {
@@ -95,15 +96,16 @@ public class IntArrayList {
 				j--;
 			}
 		}
+		this.size = tmpSize;
 		this.array = tmp;
 		return gefunden;
 	}
-	
+
 	public int removeAt(final int idx) {
 		int ret = 0;
 		int[] tmp = new int[this.array.length - 1];
-		for(int i = 0, j = 0; i < this.size; i++, j++) {
-			if(this.array[i] != array[idx] ) {
+		for (int i = 0, j = 0; i < this.size; i++, j++) {
+			if (this.array[i] != array[idx]) {
 				tmp[j] = this.array[i];
 			} else {
 				j--;
@@ -112,11 +114,32 @@ public class IntArrayList {
 		}
 		this.array = tmp;
 		this.size -= 1;
+		return ret;
+	}
+	
+	
+
+	public int[] removeAll(final int[] values) { // soll int[] zurückgeben
+		int gefunden = 0;
+		for (int value : values) {
+			for (int i = 0; i < this.size; i++) {
+				if (array[i] == value) {
+					gefunden++;
+				}
+			}
+		}
+		
+		int[] ret = new int[gefunden];
+		int j = 0;
+		for (int val : values) {
+			for(int i = 0; i < this.size; i++) {
+				if(val == this.array[i]) {
+					ret[j] = val;
+					j++;
+				}
+			}
+			remove(val);			
+		}		
 		return ret;		
 	}
-
-	public int[] removeAll(final int[] values) { // hier 
-		return 0;
-	}
-
 }
