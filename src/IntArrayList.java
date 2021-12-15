@@ -102,10 +102,11 @@ public class IntArrayList {
 	public int removeAt(final int idx) {
 		int ret = 0;
 		int[] tmp = new int[this.array.length - 1];
-		for(int i = 0; i < this.size; i++) {
+		for(int i = 0, j = 0; i < this.size; i++, j++) {
 			if(this.array[i] != array[idx] ) {
-				tmp[i] = this.array[i];
+				tmp[j] = this.array[i];
 			} else {
+				j--;
 				ret = array[idx];
 			}
 		}
@@ -114,7 +115,7 @@ public class IntArrayList {
 		return ret;		
 	}
 
-	public int removeAll(final int[] values) { // hier 
+	public int[] removeAll(final int[] values) { // hier 
 		return 0;
 	}
 

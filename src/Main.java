@@ -43,7 +43,7 @@ public class Main {
 		System.out.println();
 		
 		System.out.println("Es wurden " + (ia.remove(3)) + " Elemente entfernt.");
-		
+		System.out.println("size: " + ia.getSize());
 		for (int zahl : ia.getArray()) {
 			System.out.print(zahl + " ");
 		}
@@ -51,7 +51,7 @@ public class Main {
 		System.out.println();
 		
 		System.out.println("Es wurde die Zahl " + (ia.removeAt(21)) + " entfernt.");
-		
+		System.out.println("size: " + ia.getSize());
 		for (int zahl : ia.getArray()) {
 			System.out.print(zahl + " ");
 		}
