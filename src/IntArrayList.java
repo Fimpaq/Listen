@@ -142,4 +142,19 @@ public class IntArrayList {
 		}		
 		return ret;		
 	}
+	
+	public void clear() {
+		this.size = 0;
+		this.array = new int[10];
+	}
+	
+	public int get(final int index) {
+		return this.array[index];
+	}
+	
+	public void mergeSort() {
+		int arrayLength = this.array.length;
+		
+	}
+	
 }

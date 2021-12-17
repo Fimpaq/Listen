@@ -78,6 +78,18 @@ public class Main {
 			System.out.print(zahl + " ");
 		}
 		
+		System.out.println();
+		
+		// alles löschen
+		ia.clear();
+		System.out.println("size: " + ia.getSize());
+		for (int num : ia.getArray()) {
+			System.out.print(num + " ");
+		}
+		
+		System.out.println();
+		
+		
 		
 	}
 }
