@@ -148,7 +148,7 @@ public class IntArrayList {
 		this.array = new int[10];
 	}
 	
-	public int get(final int index) {
+	public int getIndex(final int index) {
 		return this.array[index];
 	}
 	

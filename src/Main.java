@@ -80,6 +80,12 @@ public class Main {
 		
 		System.out.println();
 		
+		// bestimmten index ausgeben
+		int idx = 6;
+		System.out.println("Die Zahl auf Index " + idx + " beträgt " + ia.getIndex(idx) + ".");	
+		
+		System.out.println();
+		
 		// alles löschen
 //		ia.clear();
 //		System.out.println("size: " + ia.getSize());
@@ -91,9 +97,9 @@ public class Main {
 		
 		// sortieren
 		ia.sortArray();
+		System.out.println("Sortiert: ");
 		for (int num : ia.getArray()) {
 			System.out.print(num + " ");
-		}
-		
+		}		
 	}
 }
