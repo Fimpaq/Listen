@@ -152,9 +152,59 @@ public class IntArrayList {
 		return this.array[index];
 	}
 	
-	public void mergeSort() {
-		int arrayLength = this.array.length;
+	public void mergeSort(int[] input) {
+		int startLength = input.length;
 		
+		// wann stoppen
+		if(startLength < 2) {
+			return;
+		}
+		
+		// halbieren
+		int middel = startLength / 2;
+		int[] leftArray = new int[middel];		
+		int[] rightArray = new int[startLength - middel];
+		
+		for (int i = 0; i < middel; i++) {
+			leftArray[i] = input[i];
+		}
+		for (int i = middel, j = 0; i < startLength; i++, j++) {
+			rightArray[j] = input[i];
+		}
+		
+		mergeSort(leftArray);
+		mergeSort(rightArray);		
+		
+		merge(input, rightArray, leftArray);
+	}
+	
+	private void merge(int[] input, int[] rightArray, int[] leftArray) {
+		int leftLength = leftArray.length;
+		int rightLength = rightArray.length;
+		
+		int i = 0, j = 0, k = 0;
+		
+		while(i < leftLength && j < rightLength) {
+			if(leftArray[i] <= rightArray[j]) {
+				input[k] = leftArray[i];
+				i++;
+			} else {
+				input[k] = rightArray[j];
+				j++;
+			}
+			k++;
+		}
+		
+		while (i < leftLength) {
+			input[k] = leftArray[i];
+			i++;
+			k++;
+		}
+		while (j < rightLength) {
+			input[k] = rightArray[j];
+			j++;
+			k++;
+		}
 	}
 	
 }

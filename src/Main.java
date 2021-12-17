@@ -81,15 +81,19 @@ public class Main {
 		System.out.println();
 		
 		// alles löschen
-		ia.clear();
-		System.out.println("size: " + ia.getSize());
+//		ia.clear();
+//		System.out.println("size: " + ia.getSize());
+//		for (int num : ia.getArray()) {
+//			System.out.print(num + " ");
+//		}
+//		
+//		System.out.println();
+		
+		// sortieren
+		ia.mergeSort(ia.getArray());
 		for (int num : ia.getArray()) {
 			System.out.print(num + " ");
 		}
-		
-		System.out.println();
-		
-		
 		
 	}
 }
