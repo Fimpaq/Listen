@@ -90,7 +90,7 @@ public class Main {
 //		System.out.println();
 		
 		// sortieren
-		ia.mergeSort(ia.getArray());
+		ia.sortArray();
 		for (int num : ia.getArray()) {
 			System.out.print(num + " ");
 		}

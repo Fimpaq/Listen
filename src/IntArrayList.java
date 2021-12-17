@@ -119,7 +119,7 @@ public class IntArrayList {
 	
 	
 
-	public int[] removeAll(final int[] values) { // soll int[] zurückgeben
+	public int[] removeAll(final int[] values) {
 		int gefunden = 0;
 		for (int value : values) {
 			for (int i = 0; i < this.size; i++) {
@@ -152,15 +152,29 @@ public class IntArrayList {
 		return this.array[index];
 	}
 	
-	public void mergeSort(int[] input) {
-		int startLength = input.length;
+	// sortieren ------------------------------------
+	public void sortArray() {
+		mergeSort(this.array);
 		
-		// wann stoppen
+		int[] tmp = new int[this.array.length];
+		
+		int i = 0;
+		for (int num : this.array) {
+			if (num != 0) {
+				tmp[i] = num;
+				i++;
+			}
+		}
+		this.array = tmp;
+	}
+	
+	private void mergeSort(final int[] input) {
+		int startLength = input.length;
+
 		if(startLength < 2) {
 			return;
 		}
-		
-		// halbieren
+
 		int middel = startLength / 2;
 		int[] leftArray = new int[middel];		
 		int[] rightArray = new int[startLength - middel];
@@ -178,7 +192,7 @@ public class IntArrayList {
 		merge(input, rightArray, leftArray);
 	}
 	
-	private void merge(int[] input, int[] rightArray, int[] leftArray) {
+	private void merge(final int[] input, final int[] rightArray, final int[] leftArray) {
 		int leftLength = leftArray.length;
 		int rightLength = rightArray.length;
 		
@@ -205,6 +219,5 @@ public class IntArrayList {
 			j++;
 			k++;
 		}
-	}
-	
+	}	
 }
