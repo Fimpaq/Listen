@@ -1,4 +1,4 @@
-import java.util.Iterator;
+
 
 public class IntArrayList {
 	private int[] array;
@@ -219,5 +219,19 @@ public class IntArrayList {
 			j++;
 			k++;
 		}
-	}	
+	}
+	
+	public void simpleSortArray() {
+		int a;
+		for (int z = 0; z < this.array.length; z++) {
+			for (int i = 0; i < this.array.length - 1; i++) {
+				if (array[i] > array[i + 1]) {
+					a = array[i];
+					array[i] = array[i + 1];
+					array[i + 1] = a;
+				}
+			}
+		}
+	}
 }
+
