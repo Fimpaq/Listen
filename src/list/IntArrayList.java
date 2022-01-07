@@ -1,18 +1,18 @@
 package list;
 
 public class IntArrayList {
-	private Number[] array;
+	private Object[] array;
 	private int size = 0; // amount of elements in array
 
 	public IntArrayList() {
-		this.array = new Number[10];
+		this.array = new Object[10];
 	}
 
 	public IntArrayList(final int length) {
-		this.array = new Number[length];
+		this.array = new Object[length];
 	}
 
-//	public IntArrayList(final Integer[] array) { // var args and array = gleich?
+//	public IntArrayList(final Object[] array) { // var args and array = gleich?
 //		this.array = new Integer[array.length];
 //		for (int i = 0; i < array.length; i++) {
 //			this.array[i] = array[i];
@@ -20,15 +20,15 @@ public class IntArrayList {
 //		this.size = array.length;
 //	}
 
-	public IntArrayList(final Number... array) {
-		this.array = new Number[array.length];
+	public IntArrayList(final Object... array) {
+		this.array = new Object[array.length];
 		for (int i = 0; i < array.length; i++) {
 			this.array[i] = array[i];
 		}
 		this.size = array.length;
 	}
 
-	public Number[] getArray() {
+	public Object[] getArray() {
 		return this.array;
 	}
 
@@ -36,7 +36,7 @@ public class IntArrayList {
 		return this.size;
 	}
 
-	public Number get(final int idx) {
+	public Object get(final int idx) {
 		if (idx >= 0 && idx < this.size) {
 			return this.array[idx];
 		}
@@ -52,7 +52,7 @@ public class IntArrayList {
 			while ((this.size + n) > al) {
 				al += (al / 2);
 			}
-			final Number[] tmp = new Number[al];
+			final Object[] tmp = new Object[al];
 			for (int i = 0; i < this.size; ++i) {
 				tmp[i] = this.array[i];
 			}
@@ -60,30 +60,30 @@ public class IntArrayList {
 		}
 	}
 
-	public void add(final Number... values) {
+	public void add(final Object... values) {
 		checkSize(values.length);
 
 		int i = this.size;
-		for (Number value : values) {
+		for (Object value : values) {
 			this.array[i] = value;
 			i++;
 		}
 		this.size = i;
 	}
 
-	public void addArray(final Number[] array) {
+	public void addArray(final Object[] array) {
 		checkSize(array.length);
 
 		int i = this.size;
 
-		for (Number value : array) {
+		for (Object value : array) {
 			this.array[i] = value;
 			i++;
 		}
 		this.size = i;
 	}
 
-	public Number remove(final Number value) {
+	public Object remove(final Object value) {
 		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
 		int tmpSize = this.size; 
 		for (int i = 0; i < this.size; i++) {
@@ -93,7 +93,7 @@ public class IntArrayList {
 			}
 		}
 
-		Number[] tmp = new Number[this.array.length - gefunden];
+		Object[] tmp = new Object[this.array.length - gefunden];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (!array[i].equals(value)) {
 				tmp[j] = array[i];
@@ -106,9 +106,9 @@ public class IntArrayList {
 		return gefunden;
 	}
 
-	public Number removeAt(final int idx) {
-		Number ret = 0;
-		Number[] tmp = new Number[this.array.length - 1];
+	public Object removeAt(final int idx) {
+		Object ret = 0;
+		Object[] tmp = new Object[this.array.length - 1];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (this.array[i] != array[idx]) {
 				tmp[j] = this.array[i];
@@ -123,9 +123,9 @@ public class IntArrayList {
 	}
 
 
-	public Number[] removeAll(final Number[] values) {
+	public Object[] removeAll(final Object[] values) {
 		int gefunden = 0;
-		for (Number value : values) {
+		for (Object value : values) {
 			for (int i = 0; i < this.size; i++) {
 				if (array[i].equals(value)) {
 					gefunden++;
@@ -133,9 +133,9 @@ public class IntArrayList {
 			}
 		}
 
-		Number[] ret = new Number[gefunden];
+		Object[] ret = new Object[gefunden];
 		int j = 0;
-		for (Number val : values) {
+		for (Object val : values) {
 			for (int i = 0; i < this.size; i++) {
 				if (val == this.array[i]) {
 					ret[j] = val;

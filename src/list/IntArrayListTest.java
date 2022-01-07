@@ -1,8 +1,16 @@
 package list;
 
+import java.time.LocalDate;
+
+import family.Person;
+import family.Person.Geschlecht;
+
 public class IntArrayListTest {
 	
-	
+	static Person p1 = new Person("Donald", "Duck", LocalDate.of(1945, 11, 22), Geschlecht.MAENNLICH);
+	static Person p2 = new Person("Daisy", "Duck", LocalDate.of(1968, 12, 24), Geschlecht.WEIBLICH);
+	static Person p3 = new Person("Lucky", "Luke", LocalDate.of(1974, 7, 5), Geschlecht.MAENNLICH);
+	static Person p4 = new Person("Micky", "Maus", LocalDate.of(1973, 4, 13), Geschlecht.MAENNLICH);	
 
 	public static void main(String[] args) {
 		test();
@@ -14,7 +22,8 @@ public class IntArrayListTest {
 
 //		int[] tmp = {14, 76, 63, 12, 6, 1000}; // constructor removed
 //		testFilledList(new IntArrayList(tmp));
-		testFilledList(new IntArrayList(14.2, 76.24, 63, 12, 6, 1000));
+				
+		testFilledList(new IntArrayList(p1, p2, p3, p4, 14.2, 76, 63, 12, 6, 1000));
 		
 		System.out.println("done");		
 	}
@@ -27,15 +36,21 @@ public class IntArrayListTest {
 		funktioniertRemoveAll(l);		
 //		funktioniertMergeSort(l);		
 //		funktioniertSimpleSort(l);		
-		funktioniertClear(l);		
+		geburtsdatum(l); // geburtsdatum funktioniert
+		funktioniertClear(l);	
 	}
 	
+	private static void geburtsdatum(IntArrayList l) {
+		Person px = (Person)l.get(0);
+		assert px.getGeburtsDatum().equals(LocalDate.of(1945, 11, 22));
+	}
+
 	private static void funktioniertAdd(final IntArrayList l) {
-		assert l.getSize() == 6;
+		assert l.getSize() == 10;
 		l.add(8);
-		assert l.getSize() == 7;
-		assert l.get(0).doubleValue() == 14.2;
-		assert l.get(l.getSize() - 1).intValue() == 8;
+		assert l.getSize() == 11;
+		assert l.get(0) == p1;
+		assert l.get(l.getSize() - 1) == (Object)8;
 		
 		try {
 			l.get(-1);
@@ -46,20 +61,20 @@ public class IntArrayListTest {
 	}
 	
 	private static void funktioniertAddArray(final IntArrayList l) {
-		Short[] tmp = {456, 48};
+		Integer[] tmp = {456, 48};
 		l.addArray(tmp);
-		assert l.get(l.getSize() - 2).shortValue() == 456; // value-art egal?
+		assert (l.get(l.getSize() - 2)).equals((Object)456);
 	}
 	
 	private static void funktioniertRemove(IntArrayList l) {
 		l.remove(8);
-		assert l.getSize() == 8;
+		assert l.getSize() == 12;
 	}
 	
 	private static void funktioniertRemoveAll(IntArrayList l) {
-		Number[] tmp1 = {14.2, 63};
+		Object[] tmp1 = {14.2, 63};
 		l.removeAll(tmp1);
-		assert l.getSize() == 6;		
+		assert l.getSize() == 10;		
 	}
 	
 //	private static void funktioniertMergeSort(IntArrayList l) {
@@ -84,32 +99,31 @@ public class IntArrayListTest {
 	// empty constructor ---------------------------------------
 	private static void testEmptyList(final IntArrayList l) {
 		assert l.getSize() == 0;
-		l.add(1.0, 2.0, 3.0);
-		assert l.getSize() == 3;
-		assert l.get(0).doubleValue() == 1.0;
-
+		l.add(p1, p2, p3, p4, 1.0, 2.0, 3.0);
+		assert l.getSize() == 7;
+		assert l.get(0) == p1;
 		
 		assert l.getArray().length == 10;
 		l.add(4.0, 5, 6, 1, 8, 9, 10, 11);
 		assert l.getArray().length == 15;
-		assert l.getSize() == 11;
+		assert l.getSize() == 15;
 
 		l.remove(1.0);
+		assert l.getSize() == 14;
 		
-		Number[] tmp = {3.0, 2.0};
-		l.removeAll(tmp);
-		
-		assert l.getSize() == 8;
+		Object[] tmp = {3.0, 2.0};
+		l.removeAll(tmp);		
+		assert l.getSize() == 12;
 		assert l.getArray().length == 12; 
 		
-		Number tmpInt = l.removeAt(0);
-		assert tmpInt.doubleValue() == 4.0;
-		assert l.getSize() == 7;
+		Object tmpInt = l.removeAt(0);
+		assert tmpInt == p1;
+		assert l.getSize() == 11;
 		tmp = l.getArray();
-		assert tmp[0].intValue() == 5;
-		assert tmp[6].intValue() == 11;
+		assert tmp[0] == p2;
+		assert tmp[6] == (Object)(1);
 		
-		assert l.get(5).intValue() == 10;		
+		assert l.get(5) == (Object)(6);		
 		
 		try {
 			l.get(-1);
@@ -118,24 +132,23 @@ public class IntArrayListTest {
 			assert true;
 		}
 		
-		l.add(4);		
-		l.remove(4); // entfernt alle 4en? - kein remove one
-		tmp = l.getArray();
-		
-		assert tmp[0].intValue() == 5;						
-		assert tmp[5].intValue() == 10;	
+		Person p5 = new Person("Dagobert", "Duck", LocalDate.of(1990, 4, 2), Geschlecht.MAENNLICH);		
+		l.add(p5);
+		assert l.getArray()[l.getSize() - 1] == p5;		
+		l.remove(p5);
+		assert l.getArray()[l.getSize() - 1] == (Object)11;
 		
 		l.clear();
 		assert l.getSize() == 0;
 		assert l.getArray().length != 0;
-		
-		Short snum = 2;
-		
-		
-		l.add(snum, 789, 2, 153, 846, 12, 9, 9);
-		
-		tmp = l.getArray();
-		assert tmp[0].shortValue() == 2;
+//		
+//		Short snum = 2;
+//		
+//		
+//		l.add(snum, 789, 2, 153, 846, 12, 9, 9);
+//		
+//		tmp = l.getArray();
+//		assert tmp[0].shortValue() == 2;
 		
 //		l.sortArray();
 //		l.simpleSortArray();
