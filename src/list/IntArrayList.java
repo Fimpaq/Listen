@@ -1,15 +1,15 @@
-
+package list;
 
 public class IntArrayList {
 	private int[] array;
 	private int size = 0; // amount of elements in array
 
 	public IntArrayList() {
-
+		this.array = new int[10];
 	}
 
-	public IntArrayList(final int size) {
-		this.array = new int[size];
+	public IntArrayList(final int length) {
+		this.array = new int[length];
 	}
 
 	public IntArrayList(final int[] array) {
@@ -36,6 +36,13 @@ public class IntArrayList {
 		return this.size;
 	}
 
+	public int get(final int idx) {
+//		if (idx >= 0 && idx < this.size) {
+			return this.array[idx];
+//		}
+//		throw new IllegalArgumentException(String.format("index out of range: %s", idx));
+	}
+	
 	// ------------- Aufgabe 4 -----------------------
 	// wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 
@@ -64,18 +71,16 @@ public class IntArrayList {
 		this.size = i;
 	}
 
-	public void addAll(final int[]... arrays) {
-		for (int[] array : arrays) {
-			checkSize(array.length);
+	public void addArray(final int[] array) {
+		checkSize(array.length);
 
-			int i = this.size;
+		int i = this.size;
 
-			for (int value : array) {
-				this.array[i] = value;
-				i++;
-			}
-			this.size = i;
+		for (int value : array) {
+			this.array[i] = value;
+			i++;
 		}
+		this.size = i;
 	}
 
 	public int remove(final int value) {
@@ -116,8 +121,7 @@ public class IntArrayList {
 		this.size -= 1;
 		return ret;
 	}
-	
-	
+
 
 	public int[] removeAll(final int[] values) {
 		int gefunden = 0;
@@ -128,36 +132,31 @@ public class IntArrayList {
 				}
 			}
 		}
-		
+
 		int[] ret = new int[gefunden];
 		int j = 0;
 		for (int val : values) {
-			for(int i = 0; i < this.size; i++) {
-				if(val == this.array[i]) {
+			for (int i = 0; i < this.size; i++) {
+				if (val == this.array[i]) {
 					ret[j] = val;
 					j++;
 				}
 			}
-			remove(val);			
-		}		
-		return ret;		
+			remove(val);
+		}
+		return ret;
 	}
-	
+
 	public void clear() {
 		this.size = 0;
-		this.array = new int[10];
 	}
-	
-	public int getIndex(final int index) {
-		return this.array[index];
-	}
-	
+
 	// sortieren ------------------------------------
 	public void sortArray() {
 		mergeSort(this.array);
-		
+
 		int[] tmp = new int[this.array.length];
-		
+
 		int i = 0;
 		for (int num : this.array) {
 			if (num != 0) {
@@ -167,39 +166,39 @@ public class IntArrayList {
 		}
 		this.array = tmp;
 	}
-	
+
 	private void mergeSort(final int[] input) {
 		int startLength = input.length;
 
-		if(startLength < 2) {
+		if (startLength < 2) {
 			return;
 		}
 
 		int middel = startLength / 2;
-		int[] leftArray = new int[middel];		
+		int[] leftArray = new int[middel];
 		int[] rightArray = new int[startLength - middel];
-		
+
 		for (int i = 0; i < middel; i++) {
 			leftArray[i] = input[i];
 		}
 		for (int i = middel, j = 0; i < startLength; i++, j++) {
 			rightArray[j] = input[i];
 		}
-		
+
 		mergeSort(leftArray);
-		mergeSort(rightArray);		
-		
+		mergeSort(rightArray);
+
 		merge(input, rightArray, leftArray);
 	}
-	
+
 	private void merge(final int[] input, final int[] rightArray, final int[] leftArray) {
 		int leftLength = leftArray.length;
 		int rightLength = rightArray.length;
-		
+
 		int i = 0, j = 0, k = 0;
-		
-		while(i < leftLength && j < rightLength) {
-			if(leftArray[i] <= rightArray[j]) {
+
+		while (i < leftLength && j < rightLength) {
+			if (leftArray[i] <= rightArray[j]) {
 				input[k] = leftArray[i];
 				i++;
 			} else {
@@ -208,7 +207,7 @@ public class IntArrayList {
 			}
 			k++;
 		}
-		
+
 		while (i < leftLength) {
 			input[k] = leftArray[i];
 			i++;
@@ -220,12 +219,12 @@ public class IntArrayList {
 			k++;
 		}
 	}
-	
+
 	public void simpleSortArray() {
 		int a;
 		for (int z = 0; z < this.array.length; z++) {
 			for (int i = 0; i < this.array.length - 1; i++) {
-				if (array[i] > array[i + 1]) {
+				if (array[i] > array[i + 1] && array[i + 1] != 0) {
 					a = array[i];
 					array[i] = array[i + 1];
 					array[i + 1] = a;
@@ -234,4 +233,3 @@ public class IntArrayList {
 		}
 	}
 }
-

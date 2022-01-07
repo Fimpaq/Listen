@@ -1,6 +1,7 @@
+package list;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		// zahlen im konstruktor eingeben + ausgabe
 		IntArrayList ia = new IntArrayList(4, 6, 1, 2, 3, 6, 2, 3, 2);
 		
@@ -31,12 +32,6 @@ public class Main {
 		}
 		
 		System.out.println();
-		
-		// mehrere arrays eingeben + ausgabe
-		int[] i = { 1, 2, 3 };
-		int[] o = { 5, 6, 7 };
-
-		ia.addAll(i, o);
 		
 		System.out.println("size: " + ia.getSize());
 
@@ -80,9 +75,7 @@ public class Main {
 		
 		System.out.println();
 		
-		// bestimmten index ausgeben
-		int idx = 6;
-		System.out.println("Die Zahl auf Index " + idx + " beträgt " + ia.getIndex(idx) + ".");	
+		
 		
 		System.out.println();
 		
@@ -102,4 +95,6 @@ public class Main {
 			System.out.print(num + " ");
 		}		
 	}
+	
+	
 }
