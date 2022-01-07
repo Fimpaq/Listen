@@ -14,7 +14,7 @@ public class IntArrayListTest {
 
 //		int[] tmp = {14, 76, 63, 12, 6, 1000}; // constructor removed
 //		testFilledList(new IntArrayList(tmp));
-		testFilledList(new IntArrayList(14, 76, 63, 12, 6, 1000));
+		testFilledList(new IntArrayList(14.2, 76.24, 63, 12, 6, 1000));
 		
 		System.out.println("done");		
 	}
@@ -34,8 +34,8 @@ public class IntArrayListTest {
 		assert l.getSize() == 6;
 		l.add(8);
 		assert l.getSize() == 7;
-		assert l.get(0) == 14;
-		assert l.get(l.getSize() - 1) == 8;
+		assert l.get(0).doubleValue() == 14.2;
+		assert l.get(l.getSize() - 1).intValue() == 8;
 		
 		try {
 			l.get(-1);
@@ -46,9 +46,9 @@ public class IntArrayListTest {
 	}
 	
 	private static void funktioniertAddArray(final IntArrayList l) {
-		Integer[] tmp = {456, 48};
+		Short[] tmp = {456, 48};
 		l.addArray(tmp);
-		assert l.get(l.getSize() - 1) == 48;
+		assert l.get(l.getSize() - 2).shortValue() == 456; // value-art egal?
 	}
 	
 	private static void funktioniertRemove(IntArrayList l) {
@@ -57,7 +57,7 @@ public class IntArrayListTest {
 	}
 	
 	private static void funktioniertRemoveAll(IntArrayList l) {
-		Integer[] tmp1 = {14, 76};
+		Number[] tmp1 = {14.2, 63};
 		l.removeAll(tmp1);
 		assert l.getSize() == 6;		
 	}
@@ -84,27 +84,32 @@ public class IntArrayListTest {
 	// empty constructor ---------------------------------------
 	private static void testEmptyList(final IntArrayList l) {
 		assert l.getSize() == 0;
-		l.add(1, 2, 3);
+		l.add(1.0, 2.0, 3.0);
 		assert l.getSize() == 3;
-		assert l.get(0) == 1;
+		assert l.get(0).doubleValue() == 1.0;
+
+		
 		assert l.getArray().length == 10;
-		l.add(4, 5, 6, 1, 8, 9, 10, 11);
+		l.add(4.0, 5, 6, 1, 8, 9, 10, 11);
 		assert l.getArray().length == 15;
 		assert l.getSize() == 11;
+
+		l.remove(1.0);
 		
-		Integer[] tmp = {1, 2};
+		Number[] tmp = {3.0, 2.0};
 		l.removeAll(tmp);
-		assert l.getSize() == 8;
-		assert l.getArray().length == 12; // wie soll sich array.length verändern?
 		
-		Integer tmpInt = l.removeAt(0);
-		assert tmpInt == 3;
+		assert l.getSize() == 8;
+		assert l.getArray().length == 12; 
+		
+		Number tmpInt = l.removeAt(0);
+		assert tmpInt.doubleValue() == 4.0;
 		assert l.getSize() == 7;
 		tmp = l.getArray();
-		assert tmp[0] == 4;
-		assert tmp[6] == 11;
+		assert tmp[0].intValue() == 5;
+		assert tmp[6].intValue() == 11;
 		
-		assert l.get(5) == 10;		
+		assert l.get(5).intValue() == 10;		
 		
 		try {
 			l.get(-1);
@@ -117,16 +122,20 @@ public class IntArrayListTest {
 		l.remove(4); // entfernt alle 4en? - kein remove one
 		tmp = l.getArray();
 		
-		assert tmp[0] == 5;
-		assert tmp[5] == 11;	
+		assert tmp[0].intValue() == 5;						
+		assert tmp[5].intValue() == 10;	
 		
 		l.clear();
 		assert l.getSize() == 0;
-		assert l.getArray().length != 0; // nach clear array.length gleichbleibend?
+		assert l.getArray().length != 0;
 		
-		l.add(5, 789, 2, 153, 846, 12, 9, 9);
+		Short snum = 2;
+		
+		
+		l.add(snum, 789, 2, 153, 846, 12, 9, 9);
+		
 		tmp = l.getArray();
-		assert tmp[0] == 5;
+		assert tmp[0].shortValue() == 2;
 		
 //		l.sortArray();
 //		l.simpleSortArray();
