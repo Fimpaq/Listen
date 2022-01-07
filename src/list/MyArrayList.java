@@ -1,34 +1,39 @@
 package list;
 
-public class IntArrayList {
-	private Object[] array;
+
+
+public class MyArrayList<T> {
+	private T[] array;
 	private int size = 0; // amount of elements in array
 
-	public IntArrayList() {
-		this.array = new Object[10];
+	
+	public MyArrayList() {
+		this.array = (T[])new Object[10];
 	}
 
-	public IntArrayList(final int length) {
-		this.array = new Object[length];
+	@SuppressWarnings("unchecked")
+	public MyArrayList(final int length) {
+		this.array = (T[])new Object[length];
 	}
 
-//	public IntArrayList(final Object[] array) { // var args and array = gleich?
-//		this.array = new Integer[array.length];
+//	public MyArrayList(final T[] array) { // var args and array = gleich?
+//		this.array = new T[array.length];
 //		for (int i = 0; i < array.length; i++) {
 //			this.array[i] = array[i];
 //		}
 //		this.size = array.length;
 //	}
 
-	public IntArrayList(final Object... array) {
-		this.array = new Object[array.length];
+	@SuppressWarnings("unchecked")
+	public MyArrayList(final T... array) {
+		this.array = (T[])new Object[array.length];
 		for (int i = 0; i < array.length; i++) {
 			this.array[i] = array[i];
 		}
 		this.size = array.length;
 	}
 
-	public Object[] getArray() {
+	public T[] getArray() {
 		return this.array;
 	}
 
@@ -36,7 +41,7 @@ public class IntArrayList {
 		return this.size;
 	}
 
-	public Object get(final int idx) {
+	public T get(final int idx) {
 		if (idx >= 0 && idx < this.size) {
 			return this.array[idx];
 		}
@@ -52,7 +57,8 @@ public class IntArrayList {
 			while ((this.size + n) > al) {
 				al += (al / 2);
 			}
-			final Object[] tmp = new Object[al];
+			@SuppressWarnings("unchecked")
+			final T[] tmp = (T[])new Object[al];
 			for (int i = 0; i < this.size; ++i) {
 				tmp[i] = this.array[i];
 			}
@@ -60,30 +66,30 @@ public class IntArrayList {
 		}
 	}
 
-	public void add(final Object... values) {
+	public void add(@SuppressWarnings("unchecked") final T... values) {
 		checkSize(values.length);
 
 		int i = this.size;
-		for (Object value : values) {
+		for (T value : values) {
 			this.array[i] = value;
 			i++;
 		}
 		this.size = i;
 	}
 
-	public void addArray(final Object[] array) {
+	public void addArray(final T[] array) {
 		checkSize(array.length);
 
 		int i = this.size;
 
-		for (Object value : array) {
+		for (T value : array) {
 			this.array[i] = value;
 			i++;
 		}
 		this.size = i;
 	}
 
-	public Object remove(final Object value) {
+	public int remove(final T value) {
 		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
 		int tmpSize = this.size; 
 		for (int i = 0; i < this.size; i++) {
@@ -93,7 +99,8 @@ public class IntArrayList {
 			}
 		}
 
-		Object[] tmp = new Object[this.array.length - gefunden];
+		@SuppressWarnings("unchecked")
+		T[] tmp = (T[])new Object[this.array.length - gefunden];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (!array[i].equals(value)) {
 				tmp[j] = array[i];
@@ -106,9 +113,11 @@ public class IntArrayList {
 		return gefunden;
 	}
 
-	public Object removeAt(final int idx) {
-		Object ret = 0;
-		Object[] tmp = new Object[this.array.length - 1];
+	public T removeAt(final int idx) {
+		@SuppressWarnings("unchecked")
+		T ret = (T)new Object();
+		@SuppressWarnings("unchecked")
+		T[] tmp = (T[])new Object[this.array.length - 1];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (this.array[i] != array[idx]) {
 				tmp[j] = this.array[i];
@@ -123,9 +132,9 @@ public class IntArrayList {
 	}
 
 
-	public Object[] removeAll(final Object[] values) {
+	public T[] removeAll(final T[] values) {
 		int gefunden = 0;
-		for (Object value : values) {
+		for (T value : values) {
 			for (int i = 0; i < this.size; i++) {
 				if (array[i].equals(value)) {
 					gefunden++;
@@ -133,9 +142,10 @@ public class IntArrayList {
 			}
 		}
 
-		Object[] ret = new Object[gefunden];
+		@SuppressWarnings("unchecked")
+		T[] ret = (T[])new Object[gefunden];
 		int j = 0;
-		for (Object val : values) {
+		for (T val : values) {
 			for (int i = 0; i < this.size; i++) {
 				if (val == this.array[i]) {
 					ret[j] = val;
