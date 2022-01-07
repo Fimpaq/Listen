@@ -12,9 +12,9 @@ public class IntArrayListTest {
 		testEmptyList(new IntArrayList());
 		testEmptyList(new IntArrayList(10));
 
-//		int[] tmp = {14, 76, 63, 12, 6, 1000};
-//		testFilledList(new IntArrayList(tmp));
-//		testFilledList(new IntArrayList(14, 76, 63, 12, 6, 1000));
+		int[] tmp = {14, 76, 63, 12, 6, 1000};
+		testFilledList(new IntArrayList(tmp));
+		testFilledList(new IntArrayList(14, 76, 63, 12, 6, 1000));
 		
 		System.out.println("done");		
 	}
@@ -25,8 +25,8 @@ public class IntArrayListTest {
 		funktioniertAddArray(l);		
 		funktioniertRemove(l);		
 		funktioniertRemoveAll(l);		
-		funktioniertMergeSort(l);		
-		funktioniertSimpleSort(l);		
+//		funktioniertMergeSort(l);		
+//		funktioniertSimpleSort(l);		
 		funktioniertClear(l);		
 	}
 	
@@ -40,13 +40,13 @@ public class IntArrayListTest {
 		try {
 			l.get(-1);
 			assert false;
-		} catch(final Throwable e) {
-			System.out.println("assertion error");
+		} catch(final Exception e) {
+			assert true;
 		}
 	}
 	
 	private static void funktioniertAddArray(final IntArrayList l) {
-		int[] tmp = {456, 48};
+		Integer[] tmp = {456, 48};
 		l.addArray(tmp);
 		assert l.get(l.getSize() - 1) == 48;
 	}
@@ -57,24 +57,24 @@ public class IntArrayListTest {
 	}
 	
 	private static void funktioniertRemoveAll(IntArrayList l) {
-		int[] tmp1 = {14, 76};
+		Integer[] tmp1 = {14, 76};
 		l.removeAll(tmp1);
 		assert l.getSize() == 6;		
 	}
 	
-	private static void funktioniertMergeSort(IntArrayList l) {
-		l.sortArray();
-		int[] tmp = l.getArray();
-		assert tmp[0] == 6;
-		assert tmp[l.getSize() - 1] == 1000;
-	}
-	
-	private static void funktioniertSimpleSort(IntArrayList l) {
-		l.simpleSortArray();
-		int[] tmp = l.getArray();
-		assert tmp[0] == 6;
-		assert tmp[l.getSize() - 1] == 1000;
-	}
+//	private static void funktioniertMergeSort(IntArrayList l) {
+//		l.sortArray();
+//		int[] tmp = l.getArray();
+//		assert tmp[0] == 6;
+//		assert tmp[l.getSize() - 1] == 1000;
+//	}
+//	
+//	private static void funktioniertSimpleSort(IntArrayList l) {
+//		l.simpleSortArray();
+//		int[] tmp = l.getArray();
+//		assert tmp[0] == 6;
+//		assert tmp[l.getSize() - 1] == 1000;
+//	}
 		
 	private static void funktioniertClear(IntArrayList l) {
 		l.clear();
@@ -92,12 +92,12 @@ public class IntArrayListTest {
 		assert l.getArray().length == 15;
 		assert l.getSize() == 11;
 		
-		int[] tmp = {1, 2};
+		Integer[] tmp = {1, 2};
 		l.removeAll(tmp);
 		assert l.getSize() == 8;
 		assert l.getArray().length == 12; // wie soll sich array.length verändern?
 		
-		int tmpInt = l.removeAt(0);
+		Integer tmpInt = l.removeAt(0);
 		assert tmpInt == 3;
 		assert l.getSize() == 7;
 		tmp = l.getArray();
@@ -129,24 +129,24 @@ public class IntArrayListTest {
 		assert tmp[0] == 5;
 		
 //		l.sortArray();
-		l.simpleSortArray();
-		tmp = l.getArray();
-		assert tmp[0] == 2;
-		assert tmp[l.getSize() - 1] == 846;
-		
-		assert tmp[tmp.length - 1] != 846;
-		
-		int[] rtz = {1000, 15, 36};
-		l.addArray(rtz);
-		
-		l.simpleSortArray();
-		
-		tmp = l.getArray();
-		
-		
-		for(int asd : tmp) {
-			System.out.println(asd);
-		}		
+//		l.simpleSortArray();
+//		tmp = l.getArray();
+//		assert tmp[0] == 2;
+//		assert tmp[l.getSize() - 1] == 846;
+//		
+//		assert tmp[tmp.length - 1] != 846;
+//		
+//		int[] rtz = {1000, 15, 36};
+//		l.addArray(rtz);
+//		
+//		l.simpleSortArray();
+//		
+//		tmp = l.getArray();
+//		
+//		
+//		for(int asd : tmp) {
+//			System.out.println(asd);
+//		}		
 	}
 	
 
