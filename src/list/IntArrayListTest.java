@@ -12,8 +12,8 @@ public class IntArrayListTest {
 		testEmptyList(new IntArrayList());
 		testEmptyList(new IntArrayList(10));
 
-		int[] tmp = {14, 76, 63, 12, 6, 1000};
-		testFilledList(new IntArrayList(tmp));
+//		int[] tmp = {14, 76, 63, 12, 6, 1000}; // constructor removed
+//		testFilledList(new IntArrayList(tmp));
 		testFilledList(new IntArrayList(14, 76, 63, 12, 6, 1000));
 		
 		System.out.println("done");		

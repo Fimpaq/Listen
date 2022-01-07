@@ -12,13 +12,13 @@ public class IntArrayList {
 		this.array = new Integer[length];
 	}
 
-	public IntArrayList(final int[] array) {
-		this.array = new Integer[array.length];
-		for (int i = 0; i < array.length; i++) {
-			this.array[i] = array[i];
-		}
-		this.size = array.length;
-	}
+//	public IntArrayList(final Integer[] array) { // var args and array = gleich?
+//		this.array = new Integer[array.length];
+//		for (int i = 0; i < array.length; i++) {
+//			this.array[i] = array[i];
+//		}
+//		this.size = array.length;
+//	}
 
 	public IntArrayList(final Integer... array) {
 		this.array = new Integer[array.length];
