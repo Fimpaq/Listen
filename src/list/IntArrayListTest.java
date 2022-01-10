@@ -9,7 +9,7 @@ public class IntArrayListTest {
 	
 	public static void main(String[] args) {
 		arrayLists();
-//		linkedLists();	
+		linkedLists();	
 	}
 	
 	static Person p1 = new Person("Donald", "Duck", LocalDate.of(1945, 11, 22), Geschlecht.MAENNLICH);
@@ -30,13 +30,11 @@ public class IntArrayListTest {
 	}
 	
 	public static void linkedLists() {
-		MyList myLinkedList1 = new MyArrayList();
-		MyList myLinkedList2 = new MyArrayList(30);
-		MyList<?> myLinkedList3 = new MyArrayList<Person>(p1, p2, p3);
+		MyList myLinkedList1 = new MyLinkedList();
+//		MyList<?> myLinkedList3 = new MyLinkedList<Person>(p1, p2, p3);
 
 		test(myLinkedList1);
-		test(myLinkedList2);
-		test(myLinkedList3); 
+//		test(myLinkedList3); 
 				
 		System.out.println("LinkedList test done");		
 	}	
