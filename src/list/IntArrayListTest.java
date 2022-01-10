@@ -17,19 +17,19 @@ public class IntArrayListTest {
 	}
 
 	private static void test() {
-		testEmptyList(new MyArrayList());
-		testEmptyList(new MyArrayList(10));
+		testEmptyList(new MyLinkedList<>());
+		testEmptyList(new MyArrayList<>(10));
 
 //		int[] tmp = {14, 76, 63, 12, 6, 1000}; // constructor removed
 //		testFilledList(new IntArrayList(tmp));
 				
-		testFilledList(new MyArrayList(p1, p2, p3, p4, 14.2, 76, 63, 12, 6, 1000));
+		testFilledList(new MyArrayList<Person>(p1, p2, p3, p4));
 		
 		System.out.println("done");		
 	}
 	
 	// filled constructor -----------------------------------
-	private static void testFilledList(final MyArrayList l) {		
+	private static void testFilledList(final MyList<Person> l) {		
 		funktioniertAdd(l);		
 		funktioniertAddArray(l);		
 		funktioniertRemove(l);		
@@ -40,15 +40,15 @@ public class IntArrayListTest {
 		funktioniertClear(l);	
 	}
 	
-	private static void geburtsdatum(MyArrayList l) {
-		Person px = (Person)l.get(0);
+	private static void geburtsdatum(MyList<Person> l) {
+		Person px = l.get(0);
 		assert px.getGeburtsDatum().equals(LocalDate.of(1945, 11, 22));
 	}
 
-	private static void funktioniertAdd(final MyArrayList l) {
-		assert l.getSize() == 10;
+	private static void funktioniertAdd(final MyList l) {
+		assert l.getSize() == 4;
 		l.add(8);
-		assert l.getSize() == 11;
+		assert l.getSize() == 5;
 		assert l.get(0) == p1;
 		assert l.get(l.getSize() - 1) == (Object)8;
 		
@@ -60,18 +60,18 @@ public class IntArrayListTest {
 		}
 	}
 	
-	private static void funktioniertAddArray(final MyArrayList l) {
+	private static void funktioniertAddArray(final MyList l) {
 		Integer[] tmp = {456, 48};
 		l.addArray(tmp);
 		assert (l.get(l.getSize() - 2)).equals((Object)456);
 	}
 	
-	private static void funktioniertRemove(MyArrayList l) {
-		l.remove(8);
-		assert l.getSize() == 12;
+	private static void funktioniertRemove(MyList<Person> l) {
+		l.remove(p1);
+		assert l.getSize() == 6;
 	}
 	
-	private static void funktioniertRemoveAll(MyArrayList l) {
+	private static void funktioniertRemoveAll(MyList l) {
 		Object[] tmp1 = {14.2, 63};
 		l.removeAll(tmp1);
 		assert l.getSize() == 10;		
@@ -91,19 +91,19 @@ public class IntArrayListTest {
 //		assert tmp[l.getSize() - 1] == 1000;
 //	}
 		
-	private static void funktioniertClear(MyArrayList l) {
+	private static void funktioniertClear(MyList l) {
 		l.clear();
 		assert l.getSize() == 0;
 	}
 
 	// empty constructor ---------------------------------------
-	private static void testEmptyList(final MyArrayList l) {
+	private static void testEmptyList(final MyList<Object> l) {
 		assert l.getSize() == 0;
 		l.add(p1, p2, p3, p4, 1.0, 2.0, 3.0);
 		assert l.getSize() == 7;
 		assert l.get(0) == p1;
 		
-		assert l.getArray().length == 10;
+		assert ((MyArrayList<Object>)l).getArray().length == 10;
 		l.add(4.0, 5, 6, 1, 8, 9, 10, 11);
 		assert l.getArray().length == 15;
 		assert l.getSize() == 15;

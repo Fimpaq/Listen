@@ -2,16 +2,17 @@ package list;
 
 
 
-public class MyArrayList<T> {
+public class MyArrayList<T> implements MyList<T> {
 	private T[] array;
 	private int size = 0; // amount of elements in array
 
+	
 	
 	public MyArrayList() {
 		this.array = (T[])new Object[10];
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public MyArrayList(final int length) {
 		this.array = (T[])new Object[length];
 	}
@@ -24,7 +25,7 @@ public class MyArrayList<T> {
 //		this.size = array.length;
 //	}
 
-	@SuppressWarnings("unchecked")
+	
 	public MyArrayList(final T... array) {
 		this.array = (T[])new Object[array.length];
 		for (int i = 0; i < array.length; i++) {
@@ -37,10 +38,12 @@ public class MyArrayList<T> {
 		return this.array;
 	}
 
+	@Override
 	public int getSize() {
 		return this.size;
 	}
 
+	@Override
 	public T get(final int idx) {
 		if (idx >= 0 && idx < this.size) {
 			return this.array[idx];
@@ -51,13 +54,14 @@ public class MyArrayList<T> {
 	// ------------- Aufgabe 4 -----------------------
 	// wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 
+	
+	
 	private void checkSize(final int n) { // für add / addAll
 		if ((this.size + n) > this.array.length) {
 			int al = this.array.length;
 			while ((this.size + n) > al) {
 				al += (al / 2);
 			}
-			@SuppressWarnings("unchecked")
 			final T[] tmp = (T[])new Object[al];
 			for (int i = 0; i < this.size; ++i) {
 				tmp[i] = this.array[i];
@@ -66,7 +70,8 @@ public class MyArrayList<T> {
 		}
 	}
 
-	public void add(@SuppressWarnings("unchecked") final T... values) {
+	@Override
+	public void add(final T... values) {
 		checkSize(values.length);
 
 		int i = this.size;
@@ -77,6 +82,7 @@ public class MyArrayList<T> {
 		this.size = i;
 	}
 
+	@Override
 	public void addArray(final T[] array) {
 		checkSize(array.length);
 
@@ -89,6 +95,7 @@ public class MyArrayList<T> {
 		this.size = i;
 	}
 
+	@Override
 	public int remove(final T value) {
 		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
 		int tmpSize = this.size; 
@@ -99,7 +106,7 @@ public class MyArrayList<T> {
 			}
 		}
 
-		@SuppressWarnings("unchecked")
+		
 		T[] tmp = (T[])new Object[this.array.length - gefunden];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (!array[i].equals(value)) {
@@ -113,10 +120,11 @@ public class MyArrayList<T> {
 		return gefunden;
 	}
 
+	@Override
 	public T removeAt(final int idx) {
-		@SuppressWarnings("unchecked")
+		
 		T ret = (T)new Object();
-		@SuppressWarnings("unchecked")
+		
 		T[] tmp = (T[])new Object[this.array.length - 1];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
 			if (this.array[i] != array[idx]) {
@@ -131,7 +139,7 @@ public class MyArrayList<T> {
 		return ret;
 	}
 
-
+	@Override
 	public T[] removeAll(final T[] values) {
 		int gefunden = 0;
 		for (T value : values) {
@@ -142,7 +150,7 @@ public class MyArrayList<T> {
 			}
 		}
 
-		@SuppressWarnings("unchecked")
+		
 		T[] ret = (T[])new Object[gefunden];
 		int j = 0;
 		for (T val : values) {
@@ -157,6 +165,7 @@ public class MyArrayList<T> {
 		return ret;
 	}
 
+	@Override
 	public void clear() {
 		this.size = 0;
 	}
