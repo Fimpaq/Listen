@@ -1,31 +1,22 @@
+// wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 package list;
-
-
 
 public class MyArrayList<T> implements MyList<T> {
 	private T[] array;
-	private int size = 0; // amount of elements in array
-
+	private int size = 0; // amount of elements in array	
 	
-	
+	@SuppressWarnings("unchecked")
 	public MyArrayList() {
 		this.array = (T[])new Object[10];
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public MyArrayList(final int length) {
 		this.array = (T[])new Object[length];
 	}
-
-//	public MyArrayList(final T[] array) { // var args and array = gleich?
-//		this.array = new T[array.length];
-//		for (int i = 0; i < array.length; i++) {
-//			this.array[i] = array[i];
-//		}
-//		this.size = array.length;
-//	}
-
 	
+	@SuppressWarnings("unchecked")
 	public MyArrayList(final T... array) {
 		this.array = (T[])new Object[array.length];
 		for (int i = 0; i < array.length; i++) {
@@ -51,11 +42,7 @@ public class MyArrayList<T> implements MyList<T> {
 		throw new IllegalArgumentException(String.format("index out of range: %s", idx));
 	}
 	
-	// ------------- Aufgabe 4 -----------------------
-	// wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
-
-	
-	
+	@SuppressWarnings("unchecked")
 	private void checkSize(final int n) { // für add / addAll
 		if ((this.size + n) > this.array.length) {
 			int al = this.array.length;
@@ -70,6 +57,7 @@ public class MyArrayList<T> implements MyList<T> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... values) {
 		checkSize(values.length);
@@ -95,6 +83,7 @@ public class MyArrayList<T> implements MyList<T> {
 		this.size = i;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int remove(final T value) {
 		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
@@ -120,6 +109,7 @@ public class MyArrayList<T> implements MyList<T> {
 		return gefunden;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T removeAt(final int idx) {
 		
@@ -139,6 +129,7 @@ public class MyArrayList<T> implements MyList<T> {
 		return ret;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T[] removeAll(final T[] values) {
 		int gefunden = 0;

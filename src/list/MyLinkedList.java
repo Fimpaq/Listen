@@ -1,16 +1,50 @@
 package list;
 public class MyLinkedList<T> implements MyList<T> {
 
+	private int size = 0; // amount of elements in array	
+	
+	
+
+	
+	public MyLinkedList() {
+	}
+	
+	@SuppressWarnings("unchecked")
+	public MyLinkedList(final int length) {
+		this.array = (T[])new Object[length];
+	}
+	
+	@SuppressWarnings("unchecked")
+	public MyLinkedList(final T... array) {
+		this.array = (T[])new Object[array.length];
+		for (int i = 0; i < array.length; i++) {
+			this.array[i] = array[i];
+		}
+		this.size = array.length;
+	}
+	
+
 	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+	public T[] getArray() {
+		return this.array;
 	}
 
 	@Override
+	public int getSize() {
+		return this.size;
+	}
+	
+	@Override
+	public void clear() {
+		this.size = 0;
+	}
+
+	
+	
+	
+	@Override
 	public T get(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
@@ -43,10 +77,5 @@ public class MyLinkedList<T> implements MyList<T> {
 		return null;
 	}
 
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }
