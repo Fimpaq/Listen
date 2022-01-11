@@ -31,10 +31,8 @@ public class IntArrayListTest {
 	
 	public static void linkedLists() {
 		MyList myLinkedList1 = new MyLinkedList();
-//		MyList<?> myLinkedList3 = new MyLinkedList<Person>(p1, p2, p3);
 
 		test(myLinkedList1);
-//		test(myLinkedList3); 
 				
 		System.out.println("LinkedList test done");		
 	}	

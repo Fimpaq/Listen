@@ -2,26 +2,6 @@ package list;
 
 public class MyLinkedList<T> implements MyList<T> {
 
-	public static void main(String[] args) {
-		MyLinkedList q = new MyLinkedList();
-		q.add(5, 11);
-		q.add(10);
-		System.out.println("listenGöße: " + q.getSize());
-
-		System.out.println("Element 1: " + q.get(0));
-		System.out.println("Element 2: " + q.get(1));
-		System.out.println("Element 3: " + q.get(2));
-
-		
-		System.out.println("Entferne: " + q.remove(10));
-
-		for (int i = 0; i < q.getSize(); i++) {
-			System.out.println("Element " + i + ": " + q.get(i));
-		}
-
-		System.out.println("neue Größe: " + q.getSize());
-	}
-
 	private static class Node<T> {
 		public T element;
 		public Node<T> next;
@@ -73,6 +53,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
 	@Override
 	public T removeAt(int idx) {
+		Node<T> ret = this.node;
 		if (idx == 0) {
 			this.node = node.next;
 			this.size--;
@@ -81,6 +62,11 @@ public class MyLinkedList<T> implements MyList<T> {
 			for (int i = 0; i < idx - 1; ++i) {
 				beforeThat = beforeThat.next;
 			}
+			
+			for (int i = 0; i < idx; i++) {
+				ret = ret.next;
+			}
+			
 			Node<T> afterThat = this.node;
 			for (int i = 0; i <= idx; ++i) {
 				afterThat = afterThat.next;
@@ -88,11 +74,9 @@ public class MyLinkedList<T> implements MyList<T> {
 			beforeThat.next = afterThat;
 			this.size--;
 		}
-
-		return null;
-//		return afterThat.element;
-	}
-
+		return ret.element;
+	}	
+	
 	@Override
 	public int remove(T value) { // gibt anzahl entfernter elemente zurück
 		int ret = 0;
@@ -111,15 +95,17 @@ public class MyLinkedList<T> implements MyList<T> {
 				ret++;
 				removeAt(i);
 			}		
-		
 		}
+		
 		return ret;
 	}
 
 	@Override
 	public T[] removeAll(T[] values) {
+		Node<T>[] NodeArray;
 		for(T value : values) {
 			remove(value);
+			
 		}
 		return null;
 	}
