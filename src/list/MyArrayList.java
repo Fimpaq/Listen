@@ -82,10 +82,10 @@ public class MyArrayList<T> implements MyList<T> {
 		this.size = i;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public int remove(final T value) {
-		int gefunden = 0; // das array wird um die anzahl der entferten elemte verkleinert / weglassen?
+	public Deleted remove(final T value) {
+		int gefunden = 0;
 		int tmpSize = this.size; 
 		for (int i = 0; i < this.size; i++) {
 			if (array[i].equals(value)) {
@@ -105,7 +105,7 @@ public class MyArrayList<T> implements MyList<T> {
 		}
 		this.size = tmpSize;
 		this.array = tmp;
-		return gefunden;
+		return new Deleted(value, gefunden);
 	}
 
 	@SuppressWarnings("unchecked")

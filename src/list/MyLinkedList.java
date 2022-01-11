@@ -13,6 +13,21 @@ public class MyLinkedList<T> implements MyList<T> {
 
 	private Node<T> node;
 	private int size = 0;
+	
+	public MyLinkedList() {}
+	
+	@SuppressWarnings("unchecked")
+	public MyLinkedList(final T... elements) {
+		for (T element : elements) {
+			final Node<T> node = new Node<>(element);
+			if (this.size == 0) {
+				this.node = node;
+			} else {
+				getInternal(this.size - 1).next = node;
+			}
+			++this.size;
+		}
+	}
 
 	public int getSize() {
 		return this.size;
@@ -33,6 +48,7 @@ public class MyLinkedList<T> implements MyList<T> {
 		return getInternal(idx).element;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
 		addArray(elements);
@@ -50,8 +66,6 @@ public class MyLinkedList<T> implements MyList<T> {
 			++this.size;
 		}
 	}
-	
-	
 
 	@Override
 	public T removeAt(int idx) {
@@ -79,14 +93,15 @@ public class MyLinkedList<T> implements MyList<T> {
 		return ret.element;
 	}	
 	
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public int remove(T value) { // gibt anzahl entfernter elemente zurück
-		int ret = 0;
+	public Deleted remove(final T value) {
+		int amount = 0;
 		int i = 0;
 		Node<T> found = this.node;
 		
 		if (found.element.equals(value)) {
-			ret++;
+			amount++;
 			removeAt(i);
 		}
 		
@@ -94,22 +109,22 @@ public class MyLinkedList<T> implements MyList<T> {
 			found = found.next;
 			i++;
 			if (found.element.equals(value)) {
-				ret++;
+				amount++;
 				removeAt(i);
 			}		
-		}
-		
-		return ret;
+		}		
+		return new Deleted(value, amount);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T[] removeAll(T[] values) {
-		Node<T>[] NodeArray;
-		for(T value : values) {
-			remove(value);
-			
+		T[] ret = (T[]) new Object[values.length];
+		int i = 0;
+		for (T value : values) {			
+			ret[i] = (T) remove(value).element;
 		}
-		return null;
+		return ret;
 	}
 
 	@Override

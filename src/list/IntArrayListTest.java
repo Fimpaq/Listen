@@ -31,13 +31,14 @@ public class IntArrayListTest {
 	
 	public static void linkedLists() {
 		MyList myLinkedList1 = new MyLinkedList();
+		MyList myLinkedList2 = new MyLinkedList(p1, p2, p3);
 
+		test(myLinkedList2);
 		test(myLinkedList1);
 				
 		System.out.println("LinkedList test done");		
 	}	
 	
-	@SuppressWarnings("unchecked")
 	private static void test(final MyList l) {		
 		funktioniertAddPerson(l);
 		funktioniertAddInteger(l);
