@@ -10,7 +10,7 @@ import family.Person.Geschlecht;
 public class IntArrayListTest {
 	
 	public static void main(String[] args) {
-		arrayLists();
+//		arrayLists();
 		
 		linkedLists();	
 	}
@@ -51,11 +51,11 @@ public class IntArrayListTest {
 		funktioniertRemoveAt(l);
 		funktioniertRemove(l);		
 		funktioniertRemoveAll(l);		
+		funktioniertGetList(l);
 //		funktioniertMergeSort(l);		
 //		funktioniertSimpleSort(l);		
 		geburtsdatum(l);
 		funktioniertClear(l);	
-		
 	}
 
 	private static void funktioniertAddPerson(final MyList l) {
@@ -107,6 +107,10 @@ public class IntArrayListTest {
 		assert l.getSize() == size - 2;		
 	}
 	
+	public static void funktioniertGetList(final MyList l) {
+		l.listToConsole();
+	}
+	
 //	private static void funktioniertMergeSort(IntArrayList l) {
 //		l.sortArray();
 //		int[] tmp = l.getArray();
@@ -126,7 +130,7 @@ public class IntArrayListTest {
 		assert px.getGeburtsDatum().equals(LocalDate.of(1945, 11, 22));
 	}
 		
-	private static void funktioniertClear(MyList l) {
+	private static void funktioniertClear(final MyList l) {
 		l.clear();
 		assert l.getSize() == 0;
 	}

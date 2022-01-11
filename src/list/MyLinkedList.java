@@ -28,7 +28,7 @@ public class MyLinkedList<T> implements MyList<T> {
 			++this.size;
 		}
 	}
-
+	
 	public int getSize() {
 		return this.size;
 	}
@@ -132,5 +132,15 @@ public class MyLinkedList<T> implements MyList<T> {
 	public void clear() {
 		this.size = 0;
 		this.node = null;
+	}
+
+	@Override
+	public void listToConsole() {
+		Node<T> found = this.node;
+		while (found.next != null) {
+			System.out.println(found.element);
+			found = found.next;
+		}
+		System.out.println(found.element);
 	}
 }

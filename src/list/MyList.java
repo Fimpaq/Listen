@@ -2,6 +2,7 @@ package list;
 
 public interface MyList<T> {
 
+	public void listToConsole();
 	public int getSize();	
 	public T get(final int idx);
 	

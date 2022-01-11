@@ -24,8 +24,10 @@ public class MyArrayList<T> implements MyList<T> {
 		this.size = array.length;
 	}
 
-	public T[] getArray() {
-		return this.array;
+	@Override
+	public void listToConsole() {
+		for(int i = 0; i < this.size; i++)
+		System.out.println(array[i]);
 	}
 
 	@Override
