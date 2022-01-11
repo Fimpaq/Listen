@@ -9,7 +9,6 @@ public class MyArrayList<T> implements MyList<T> {
 	public MyArrayList() {
 		this.array = (T[])new Object[10];
 	}
-
 	
 	@SuppressWarnings("unchecked")
 	public MyArrayList(final int length) {

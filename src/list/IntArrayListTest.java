@@ -41,7 +41,8 @@ public class IntArrayListTest {
 	private static void test(final MyList l) {		
 		funktioniertAddPerson(l);
 		funktioniertAddInteger(l);
-		funktioniertAddArray(l);		
+		funktioniertAddArray(l);
+		funktioniertRemoveAt(l);
 		funktioniertRemove(l);		
 		funktioniertRemoveAll(l);		
 //		funktioniertMergeSort(l);		
@@ -70,10 +71,20 @@ public class IntArrayListTest {
 		}
 	}
 	
+	private static void funktioniertGet(final MyList l) {
+		assert l.get(0) == p1;
+	}
+	
 	private static void funktioniertAddArray(final MyList l) {
-		Integer[] tmp = {456, 48};
+		Integer[] tmp = {456, 48, 123, 234, 567, 567, 234, 234, 98};
 		l.addArray(tmp);
-		assert (l.get(l.getSize() - 2)).equals((Integer)456);
+		assert (l.get(l.getSize() - 2)).equals((Integer)234);
+	}
+	
+	private static void funktioniertRemoveAt(final MyList l) {
+		int size = l.getSize();
+		l.removeAt(9);
+		assert l.getSize() == (size - 1);
 	}
 	
 	private static void funktioniertRemove(final MyList l) {
