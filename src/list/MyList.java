@@ -6,13 +6,13 @@ public interface MyList<T> {
 	public int getSize();	
 	public T get(final int idx);
 	
-	@SuppressWarnings("unchecked")
-	public void add(final T... values);	
+//	public void add(final T element); // "checksize-problem" in MyArrayList
+	public void add(@SuppressWarnings("unchecked") final T... elements);
 	public void addArray(final T[] array);	
 	
 	public T removeAt(final int idx);	
-	public Deleted<?> remove(final T value);	
-	public Deleted<?>[] removeAll(final T[] values);	
+	public Deleted<?> remove(final T element);	
+	public Deleted<?>[] removeAll(final T[] elements);	
 	
 	public void clear();
 }

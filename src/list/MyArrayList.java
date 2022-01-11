@@ -60,15 +60,8 @@ public class MyArrayList<T> implements MyList<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void add(final T... values) {
-		checkSize(values.length);
-
-		int i = this.size;
-		for (T value : values) {
-			this.array[i] = value;
-			i++;
-		}
-		this.size = i;
+	public void add(final T... elements) {
+		addArray(elements);
 	}
 
 	@Override
@@ -76,7 +69,6 @@ public class MyArrayList<T> implements MyList<T> {
 		checkSize(array.length);
 
 		int i = this.size;
-
 		for (T value : array) {
 			this.array[i] = value;
 			i++;
@@ -86,11 +78,11 @@ public class MyArrayList<T> implements MyList<T> {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public Deleted remove(final T value) {
+	public Deleted remove(final T element) {
 		int gefunden = 0;
 		int tmpSize = this.size; 
 		for (int i = 0; i < this.size; i++) {
-			if (array[i].equals(value)) {
+			if (array[i].equals(element)) {
 				gefunden++;
 				tmpSize--;
 			}
@@ -99,7 +91,7 @@ public class MyArrayList<T> implements MyList<T> {
 		
 		T[] tmp = (T[])new Object[this.array.length - gefunden];
 		for (int i = 0, j = 0; i < this.size; i++, j++) {
-			if (!array[i].equals(value)) {
+			if (!array[i].equals(element)) {
 				tmp[j] = array[i];
 			} else {
 				j--;
@@ -107,7 +99,7 @@ public class MyArrayList<T> implements MyList<T> {
 		}
 		this.size = tmpSize;
 		this.array = tmp;
-		return new Deleted(value, gefunden);
+		return new Deleted(element, gefunden);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,10 +125,10 @@ public class MyArrayList<T> implements MyList<T> {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Deleted[] removeAll(final T[] values) {
-		Deleted[] ret = new Deleted[values.length];
+	public Deleted[] removeAll(final T[] elements) {
+		Deleted[] ret = new Deleted[elements.length];
 		int i = 0;
-		for (T value : values) {			
+		for (T value : elements) {			
 			ret[i] = remove(value);
 			i++;
 		}

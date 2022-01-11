@@ -1,7 +1,5 @@
 package list;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
 
 import family.Person;
@@ -10,9 +8,8 @@ import family.Person.Geschlecht;
 public class IntArrayListTest {
 	
 	public static void main(String[] args) {
-//		arrayLists();
-		
-		linkedLists();	
+		arrayLists();
+		linkedLists();
 	}
 	
 	static Person p1 = new Person("Donald", "Duck", LocalDate.of(1945, 11, 22), Geschlecht.MAENNLICH);

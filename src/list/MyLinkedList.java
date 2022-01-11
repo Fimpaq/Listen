@@ -18,15 +18,7 @@ public class MyLinkedList<T> implements MyList<T> {
 	
 	@SuppressWarnings("unchecked")
 	public MyLinkedList(final T... elements) {
-		for (T element : elements) {
-			final Node<T> node = new Node<>(element);
-			if (this.size == 0) {
-				this.node = node;
-			} else {
-				getInternal(this.size - 1).next = node;
-			}
-			++this.size;
-		}
+		addArray(elements);
 	}
 	
 	public int getSize() {
@@ -47,7 +39,17 @@ public class MyLinkedList<T> implements MyList<T> {
 		}
 		return getInternal(idx).element;
 	}
-
+	
+	public void add(T element) {
+		final Node<T> node = new Node<>(element);
+		if (this.size == 0) {
+			this.node = node;
+		} else {
+			getInternal(this.size - 1).next = node;
+		}
+		++this.size;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
@@ -57,13 +59,7 @@ public class MyLinkedList<T> implements MyList<T> {
 	@Override
 	public void addArray(T[] array) {
 		for (T element : array) {
-			final Node<T> node = new Node<>(element);
-			if (this.size == 0) {
-				this.node = node;
-			} else {
-				getInternal(this.size - 1).next = node;
-			}
-			++this.size;
+			add(element);
 		}
 	}
 
@@ -95,12 +91,12 @@ public class MyLinkedList<T> implements MyList<T> {
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public Deleted remove(final T value) {
+	public Deleted remove(final T element) {
 		int amount = 0;
 		int i = 0;
 		Node<T> found = this.node;
 		
-		if (found.element.equals(value)) {
+		if (found.element.equals(element)) {
 			amount++;
 			removeAt(i);
 		}
@@ -108,20 +104,20 @@ public class MyLinkedList<T> implements MyList<T> {
 		while (found.next != null) {
 			found = found.next;
 			i++;
-			if (found.element.equals(value)) {
+			if (found.element.equals(element)) {
 				amount++;
 				removeAt(i);
 			}		
 		}		
-		return new Deleted(value, amount);
+		return new Deleted(element, amount);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public Deleted[] removeAll(T[] values) {
-		Deleted[] ret = new Deleted[values.length];
+	public Deleted[] removeAll(T[] elements) {
+		Deleted[] ret = new Deleted[elements.length];
 		int i = 0;
-		for (T value : values) {			
+		for (T value : elements) {			
 			ret[i] = remove(value);
 			i++;
 		}
