@@ -116,13 +116,14 @@ public class MyLinkedList<T> implements MyList<T> {
 		return new Deleted(value, amount);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public T[] removeAll(T[] values) {
-		T[] ret = (T[]) new Object[values.length];
+	public Deleted[] removeAll(T[] values) {
+		Deleted[] ret = new Deleted[values.length];
 		int i = 0;
 		for (T value : values) {			
-			ret[i] = (T) remove(value).element;
+			ret[i] = remove(value);
+			i++;
 		}
 		return ret;
 	}

@@ -128,29 +128,15 @@ public class MyArrayList<T> implements MyList<T> {
 		return ret;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public T[] removeAll(final T[] values) {
-		int gefunden = 0;
-		for (T value : values) {
-			for (int i = 0; i < this.size; i++) {
-				if (array[i].equals(value)) {
-					gefunden++;
-				}
-			}
-		}
 
-		
-		T[] ret = (T[])new Object[gefunden];
-		int j = 0;
-		for (T val : values) {
-			for (int i = 0; i < this.size; i++) {
-				if (val == this.array[i]) {
-					ret[j] = val;
-					j++;
-				}
-			}
-			remove(val);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Deleted[] removeAll(final T[] values) {
+		Deleted[] ret = new Deleted[values.length];
+		int i = 0;
+		for (T value : values) {			
+			ret[i] = remove(value);
+			i++;
 		}
 		return ret;
 	}

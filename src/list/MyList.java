@@ -2,8 +2,7 @@ package list;
 
 public interface MyList<T> {
 
-	public int getSize();
-	
+	public int getSize();	
 	public T get(final int idx);
 	
 	@SuppressWarnings("unchecked")
@@ -12,7 +11,7 @@ public interface MyList<T> {
 	
 	public T removeAt(final int idx);	
 	public Deleted<?> remove(final T value);	
-	public T[] removeAll(final T[] values);	
+	public Deleted<?>[] removeAll(final T[] values);	
 	
 	public void clear();
 }

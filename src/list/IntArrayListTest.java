@@ -1,5 +1,7 @@
 package list;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 
 import family.Person;
@@ -9,6 +11,7 @@ public class IntArrayListTest {
 	
 	public static void main(String[] args) {
 		arrayLists();
+		
 		linkedLists();	
 	}
 	
@@ -33,8 +36,10 @@ public class IntArrayListTest {
 		MyList myLinkedList1 = new MyLinkedList();
 		MyList myLinkedList2 = new MyLinkedList(p1, p2, p3);
 
-		test(myLinkedList2);
 		test(myLinkedList1);
+		test(myLinkedList2);
+		
+		
 				
 		System.out.println("LinkedList test done");		
 	}	
@@ -50,6 +55,7 @@ public class IntArrayListTest {
 //		funktioniertSimpleSort(l);		
 		geburtsdatum(l);
 		funktioniertClear(l);	
+		
 	}
 
 	private static void funktioniertAddPerson(final MyList l) {
