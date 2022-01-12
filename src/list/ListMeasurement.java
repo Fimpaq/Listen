@@ -10,6 +10,7 @@ import de.impaq.german_names.RandomName;
 import de.impaq.german_names.RandomName.Sex;
 
 public class ListMeasurement {	
+	
 	public static void main(final String... args) {
 		List<RandomName> l = new ArrayList<>();
 		System.out.println(String.format("insert al: %s", measure(ListMeasurement::insert, l)));
@@ -36,9 +37,9 @@ public class ListMeasurement {
 	}
 	
 	private static void get(final List<RandomName> l) {
-		final Random rnd = new Random();
+		final Random random = new Random();
 		for(int i = 0; i < l.size(); ++i) {
-			l.get(rnd.nextInt(l.size()));
+			l.get(random.nextInt(l.size()));
 		}
 	}
 	
