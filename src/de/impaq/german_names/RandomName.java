@@ -3,6 +3,7 @@ package de.impaq.german_names;
 import java.util.Random;
 
 public class RandomName {
+	
 	private static final String[][] firstNames = new String[][] {
 			"Maria,Marie,Elisabeth,Katharina,Catharina,Dorothea,Agnes,Magdalene,Magdalena,Sophie,Christine,Christina,Hedwig,Sibylle,Sibylla,Sophia,Barbara,Margarete,Margaretha,Johanna,Eleonore,Ursula,Charlotte,Eva"
 					.split(","),
@@ -22,8 +23,8 @@ public class RandomName {
 
 	public RandomName(Sex sex) {
 		Random random = new Random();
-		int s = (sex == Sex.ANY) ? random.nextInt(2) : sex.ordinal(); // wenn any, dann 2, sonst random 0-1
-		this.firstName = firstNames[s][random.nextInt((firstNames[s]).length)];
+		int s = (sex == Sex.ANY) ? random.nextInt(2) : sex.ordinal(); // wenn any, random 0 - 1; sonst enum-position
+		this.firstName = firstNames[s][random.nextInt((firstNames[s]).length)]; // [welches array][welcher index]
 		this.name = names[random.nextInt(names.length)];
 	}
 
