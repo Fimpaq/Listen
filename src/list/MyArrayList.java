@@ -17,7 +17,7 @@ public class MyArrayList<T> implements MyList<T> {
 	
 	@SuppressWarnings("unchecked")
 	public MyArrayList(final T... array) {
-		this.array = (T[])new Object[array.length];		
+		this.array = (T[])new Object[array.length];
 		addArray(array);
 	}
 
@@ -41,36 +41,35 @@ public class MyArrayList<T> implements MyList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void checkSize(final int n) { // für add / addAll
-		if ((this.size + n) > this.array.length) {
-			int al = this.array.length;
-			while ((this.size + n) > al) {
-				al += (al / 2);
-			}
-			final T[] tmp = (T[])new Object[al];
+	@Override
+	public void add(final T element) {
+		int arrayLength = this.array.length;
+		if((this.size + 1) > arrayLength) {
+			arrayLength += (arrayLength / 2);
+			
+			final T[] tmp = (T[])new Object[arrayLength];
 			for (int i = 0; i < this.size; ++i) {
 				tmp[i] = this.array[i];
 			}
 			this.array = tmp;
 		}
+		this.array[this.size] = element;
+		this.size++;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
-		addArray(elements);
+		for(T element : elements) {
+			add(element);
+		}
 	}
 
 	@Override
 	public void addArray(final T[] array) {
-		checkSize(array.length);
-
-		int i = this.size;
-		for (T value : array) {
-			this.array[i] = value;
-			i++;
+		for(T element : array) {
+			add(element);
 		}
-		this.size = i;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

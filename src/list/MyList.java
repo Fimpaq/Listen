@@ -6,7 +6,7 @@ public interface MyList<T> {
 	public int getSize();	
 	public T get(final int idx);
 	
-//	public void add(final T element); // "checksize-problem" in MyArrayList
+	public void add(final T element);
 	public void add(@SuppressWarnings("unchecked") final T... elements);
 	public void addArray(final T[] array);	
 	

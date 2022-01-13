@@ -26,7 +26,7 @@ public class IntArrayListTest {
 		test(myArrayList2);
 		test(myArrayList3);
 		
-		System.out.println("ArrayList test done");
+		System.err.println("ArrayList test done");
 	}
 	
 	public static void linkedLists() {
@@ -38,7 +38,7 @@ public class IntArrayListTest {
 		
 		
 				
-		System.out.println("LinkedList test done");		
+		System.err.println("LinkedList test done");		
 	}	
 	
 	private static void test(final MyList l) {		

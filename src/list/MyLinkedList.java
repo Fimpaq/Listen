@@ -18,7 +18,9 @@ public class MyLinkedList<T> implements MyList<T> {
 	
 	@SuppressWarnings("unchecked")
 	public MyLinkedList(final T... elements) {
-		addArray(elements);
+		for (T element : elements) {
+			add(element);
+		}
 	}
 	
 	public int getSize() {
@@ -53,7 +55,9 @@ public class MyLinkedList<T> implements MyList<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
-		addArray(elements);
+		for (T element : elements) {
+			add(element);
+		}
 	}
 
 	@Override
