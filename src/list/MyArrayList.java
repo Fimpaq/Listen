@@ -18,7 +18,8 @@ public class MyArrayList<T> implements MyList<T> {
 	@SuppressWarnings("unchecked")
 	public MyArrayList(final T... array) {
 		this.array = (T[])new Object[array.length];
-		addArray(array);
+		System.arraycopy(array, 0, this.array, 0, array.length);
+		//		addArray(array);
 	}
 
 	@Override
