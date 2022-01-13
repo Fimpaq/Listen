@@ -19,7 +19,6 @@ public class MyArrayList<T> implements MyList<T> {
 	public MyArrayList(final T... array) {
 		this.array = (T[])new Object[array.length];
 		System.arraycopy(array, 0, this.array, 0, array.length);
-		//		addArray(array);
 	}
 
 	@Override
@@ -61,9 +60,7 @@ public class MyArrayList<T> implements MyList<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
-		for(T element : elements) {
-			add(element);
-		}
+		System.arraycopy(elements, 0, this.array, size, size);
 	}
 
 	@Override
