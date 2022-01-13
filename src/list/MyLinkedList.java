@@ -5,32 +5,44 @@ public class MyLinkedList<T> implements MyList<T> {
 	private static class Node<T> {
 		public T element;
 		public Node<T> next;
+		public Node<T> previous;
 
 		public Node(final T element) {
 			this.element = element;
 		}
 	}
 
+	private Node<T> lastNode;
 	private Node<T> node;
 	private int size = 0;
-	
-	public MyLinkedList() {}
-	
+
+	public MyLinkedList() {
+	}
+
 	@SuppressWarnings("unchecked")
 	public MyLinkedList(final T... elements) {
 		for (T element : elements) {
 			add(element);
 		}
 	}
-	
+
 	public int getSize() {
 		return this.size;
 	}
 
 	private Node<T> getInternal(final int idx) {
-		Node<T> found = this.node;
-		for (int i = 0; i < idx; ++i) {
-			found = found.next;
+		int middle = this.size / 2;
+		Node<T> found;
+		if (idx <= middle) {
+			found = this.node;
+			for (int i = 0; i < idx; ++i) {
+				found = found.next;
+			}
+		} else {
+			found = this.lastNode;
+			for(int i = this.size - 1; i > -1; i--) {
+				found = found.previous;
+			}
 		}
 		return found;
 	}
@@ -41,17 +53,20 @@ public class MyLinkedList<T> implements MyList<T> {
 		}
 		return getInternal(idx).element;
 	}
-	
+
 	public void add(T element) {
 		final Node<T> node = new Node<>(element);
 		if (this.size == 0) {
 			this.node = node;
+			this.lastNode = node;
 		} else {
-			getInternal(this.size - 1).next = node;
+			this.lastNode.next = node;
+			node.previous = this.lastNode;
+			this.lastNode = node;
 		}
 		++this.size;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
@@ -78,11 +93,11 @@ public class MyLinkedList<T> implements MyList<T> {
 			for (int i = 0; i < idx - 1; ++i) {
 				beforeThat = beforeThat.next;
 			}
-			
+
 			for (int i = 0; i < idx; i++) {
 				ret = ret.next;
 			}
-			
+
 			Node<T> afterThat = this.node;
 			for (int i = 0; i <= idx; ++i) {
 				afterThat = afterThat.next;
@@ -91,28 +106,28 @@ public class MyLinkedList<T> implements MyList<T> {
 			this.size--;
 		}
 		return ret.element;
-	}	
-	
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Deleted remove(final T element) {
 		int amount = 0;
 		int i = 0;
 		Node<T> found = this.node;
-		
+
 		if (found.element.equals(element)) {
 			amount++;
 			removeAt(i);
 		}
-		
+
 		while (found.next != null) {
 			found = found.next;
 			i++;
 			if (found.element.equals(element)) {
 				amount++;
 				removeAt(i);
-			}		
-		}		
+			}
+		}
 		return new Deleted(element, amount);
 	}
 
@@ -121,7 +136,7 @@ public class MyLinkedList<T> implements MyList<T> {
 	public Deleted[] removeAll(T[] elements) {
 		Deleted[] ret = new Deleted[elements.length];
 		int i = 0;
-		for (T value : elements) {			
+		for (T value : elements) {
 			ret[i] = remove(value);
 			i++;
 		}

@@ -16,9 +16,11 @@ public class MyArrayList<T> implements MyList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public MyArrayList(final T... array) {
-		this.array = (T[])new Object[array.length];
-		System.arraycopy(array, 0, this.array, 0, array.length);
+	public MyArrayList(final T... elements) {
+		int elementsLength = elements.length;
+		this.array = (T[])new Object[elementsLength];
+		System.arraycopy(elements, 0, this.array, this.size, elementsLength);
+		this.size += elementsLength;
 	}
 
 	@Override
@@ -58,16 +60,36 @@ public class MyArrayList<T> implements MyList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	private void checkSize(final int n) { // für array hinzufügen
+		if ((this.size + n) > this.array.length) {
+			int al = this.array.length;
+			while ((this.size + n) > al) {
+				al += (al / 2);
+			}
+			final T[] tmp = (T[])new Object[al];
+			for (int i = 0; i < this.size; ++i) {
+				tmp[i] = this.array[i];
+			}
+			this.array = tmp;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
-		System.arraycopy(elements, 0, this.array, size, size);
+		int elementsLength = elements.length;
+		checkSize(elementsLength);
+		System.arraycopy(elements, 0, this.array, this.size, elementsLength);
+		this.size += elementsLength;
+//		System.arraycopy(array, 0, this.array, 0, array.length);
 	}
 
 	@Override
-	public void addArray(final T[] array) {
-		for(T element : array) {
-			add(element);
-		}
+	public void addArray(final T[] elements) {
+		int elementsLength = elements.length;
+		checkSize(elementsLength);
+		System.arraycopy(elements, 0, this.array, this.size, elementsLength);
+		this.size += elementsLength;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

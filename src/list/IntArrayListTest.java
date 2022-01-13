@@ -20,7 +20,7 @@ public class IntArrayListTest {
 	public static void arrayLists() {
 		MyList myArrayList1 = new MyArrayList();
 		MyList myArrayList2 = new MyArrayList(10);
-		MyList<?> myArrayList3 = new MyArrayList<Person>(p1, p2, p3);
+		MyList myArrayList3 = new MyArrayList(p1, p2, p3);
 
 		test(myArrayList1);
 		test(myArrayList2);
@@ -132,5 +132,6 @@ public class IntArrayListTest {
 		assert l.getSize() == 0;
 	}
 
+	
 }
 
