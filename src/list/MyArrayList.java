@@ -67,9 +67,7 @@ public class MyArrayList<T> implements MyList<T> {
 				al += (al / 2);
 			}
 			final T[] tmp = (T[])new Object[al];
-			for (int i = 0; i < this.size; ++i) {
-				tmp[i] = this.array[i];
-			}
+			System.arraycopy(tmp, 0, this.array, 0, this.size);
 			this.array = tmp;
 		}
 	}
@@ -81,7 +79,6 @@ public class MyArrayList<T> implements MyList<T> {
 		checkSize(elementsLength);
 		System.arraycopy(elements, 0, this.array, this.size, elementsLength);
 		this.size += elementsLength;
-//		System.arraycopy(array, 0, this.array, 0, array.length);
 	}
 
 	@Override

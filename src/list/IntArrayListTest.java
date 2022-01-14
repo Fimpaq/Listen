@@ -7,6 +7,27 @@ import family.Person.Geschlecht;
 
 public class IntArrayListTest {
 	
+//	public static void main(final String... args) {
+//	MyLinkedList l = new MyLinkedList<>();
+//	Person p1 = new Person("Donald", "Duck", LocalDate.of(1945, 11, 22), Geschlecht.MAENNLICH);
+//	l.add(1);
+//	l.add(2,3,4,5,6,7,8,9);
+//	l.add(p1);
+//	System.out.println("erstes element: " + l.get(0));
+//	System.out.println("letztes element: " + l.get(l.getSize() - 1));
+//	System.out.println("größe: " + l.getSize());
+//	Integer[] tmp = {8,9};
+//	System.err.println("entferne: " + l.removeAt(9));
+//	System.out.println("größe: " + l.getSize());
+//	
+//	System.out.println();
+//	for (int i = 0; i < l.getSize(); i++) {
+//		System.out.print(l.get(i) + "  ");
+//	}
+//
+//}
+	
+	
 	public static void main(String[] args) {
 		arrayLists();
 		linkedLists();
@@ -46,12 +67,12 @@ public class IntArrayListTest {
 		funktioniertAddInteger(l);
 		funktioniertAddArray(l);
 		funktioniertRemoveAt(l);
-		funktioniertRemove(l);		
-		funktioniertRemoveAll(l);		
+//		funktioniertRemove(l);		
+//		funktioniertRemoveAll(l);		
 		funktioniertGetList(l);
 //		funktioniertMergeSort(l);		
 //		funktioniertSimpleSort(l);		
-		geburtsdatum(l);
+//		geburtsdatum(l);
 		funktioniertClear(l);	
 	}
 

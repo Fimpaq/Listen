@@ -1,7 +1,6 @@
 package list;
 
 public class MyLinkedList<T> implements MyList<T> {
-
 	private static class Node<T> {
 		public T element;
 		public Node<T> next;
@@ -12,8 +11,8 @@ public class MyLinkedList<T> implements MyList<T> {
 		}
 	}
 
-	private Node<T> lastNode;
-	private Node<T> node;
+	private Node<T> lastNode; 
+	private Node<T> firstNode;
 	private int size = 0;
 
 	public MyLinkedList() {
@@ -31,10 +30,9 @@ public class MyLinkedList<T> implements MyList<T> {
 	}
 
 	private Node<T> getInternal(final int idx) {
-		Node<T> found;
+		Node<T> found = this.firstNode;
 		int middle = this.size / 2;
 		if (idx <= middle) {
-			found = this.node;
 			for (int i = 0; i < idx; i++) {
 				found = found.next;
 			}
@@ -58,12 +56,13 @@ public class MyLinkedList<T> implements MyList<T> {
 	public void add(T element) {
 		final Node<T> node = new Node<>(element);
 		if (this.size == 0) {
-			this.node = node;
+			this.firstNode = node;
+			this.lastNode = node;			
 		} else {
-			this.lastNode.next = node;
+			this.lastNode.next = node;			
 			node.previous = this.lastNode;
+			this.lastNode = node;
 		}
-		this.lastNode = node;
 		++this.size;
 	}
 
@@ -84,28 +83,26 @@ public class MyLinkedList<T> implements MyList<T> {
 
 	@Override
 	public T removeAt(int idx) {
-		Node<T> ret = this.node;
+		Node<T> found = getInternal(idx); // letztes element entfernen macht falsch
 		if (idx == 0) {
-			this.node = node.next;
-			this.size--;
+			this.firstNode = firstNode.next;
+			this.firstNode.previous = null;			
 		} else {
-			Node<T> beforeThat = this.node;
-			for (int i = 0; i < idx - 1; ++i) {
-				beforeThat = beforeThat.next;
+			if(found.equals(this.lastNode)) {
+				found.previous.next = null;
+				this.lastNode = found.previous;
+			} else {
+				found.previous.next = found.next;
+				found.next.previous = found.previous;
 			}
-
-			for (int i = 0; i < idx; i++) {
-				ret = ret.next;
-			}
-
-			Node<T> afterThat = this.node;
-			for (int i = 0; i <= idx; ++i) {
-				afterThat = afterThat.next;
-			}
-			beforeThat.next = afterThat;
-			this.size--;
-		}
-		return ret.element;
+		}				
+		this.size--;
+//		System.out.println("größe: " + this.size);
+//		System.out.println("first: " + this.firstNode.element);
+//		System.out.println("last: " + this.lastNode.element);
+		
+		
+		return found.element;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -113,7 +110,7 @@ public class MyLinkedList<T> implements MyList<T> {
 	public Deleted remove(final T element) {
 		int amount = 0;
 		int i = 0;
-		Node<T> found = this.node;
+		Node<T> found = this.firstNode;
 
 		if (found.element.equals(element)) {
 			amount++;
@@ -146,12 +143,12 @@ public class MyLinkedList<T> implements MyList<T> {
 	@Override
 	public void clear() {
 		this.size = 0;
-		this.node = null;
+		this.firstNode = null;
 	}
 
 	@Override
 	public void listToConsole() {
-		Node<T> found = this.node;
+		Node<T> found = this.firstNode;
 		while (found.next != null) {
 			System.out.println(found.element);
 			found = found.next;
