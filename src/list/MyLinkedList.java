@@ -31,16 +31,17 @@ public class MyLinkedList<T> implements MyList<T> {
 	}
 
 	private Node<T> getInternal(final int idx) {
-		int middle = this.size / 2;
 		Node<T> found;
+		int middle = this.size / 2;
 		if (idx <= middle) {
 			found = this.node;
-			for (int i = 0; i < idx; ++i) {
+			for (int i = 0; i < idx; i++) {
 				found = found.next;
 			}
 		} else {
+			int steps = this.size - idx;
 			found = this.lastNode;
-			for(int i = this.size - 1; i > -1; i--) {
+			for (int i = 0; i < steps - 1; i++) {
 				found = found.previous;
 			}
 		}
@@ -58,12 +59,11 @@ public class MyLinkedList<T> implements MyList<T> {
 		final Node<T> node = new Node<>(element);
 		if (this.size == 0) {
 			this.node = node;
-			this.lastNode = node;
 		} else {
 			this.lastNode.next = node;
 			node.previous = this.lastNode;
-			this.lastNode = node;
 		}
+		this.lastNode = node;
 		++this.size;
 	}
 
