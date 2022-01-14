@@ -11,7 +11,7 @@ public class MyLinkedList<T> implements MyList<T> {
 		}
 	}
 
-	private Node<T> lastNode; 
+	private Node<T> lastNode;
 	private Node<T> firstNode;
 	private int size = 0;
 
@@ -57,9 +57,9 @@ public class MyLinkedList<T> implements MyList<T> {
 		final Node<T> node = new Node<>(element);
 		if (this.size == 0) {
 			this.firstNode = node;
-			this.lastNode = node;			
+			this.lastNode = node;
 		} else {
-			this.lastNode.next = node;			
+			this.lastNode.next = node;
 			node.previous = this.lastNode;
 			this.lastNode = node;
 		}
@@ -86,22 +86,21 @@ public class MyLinkedList<T> implements MyList<T> {
 		Node<T> found = getInternal(idx); // letztes element entfernen macht falsch
 		if (idx == 0) {
 			this.firstNode = firstNode.next;
-			this.firstNode.previous = null;			
+			this.firstNode.previous = null;
 		} else {
-			if(found.equals(this.lastNode)) {
+			if (found.equals(this.lastNode)) {
 				found.previous.next = null;
 				this.lastNode = found.previous;
 			} else {
 				found.previous.next = found.next;
 				found.next.previous = found.previous;
 			}
-		}				
+		}
 		this.size--;
 //		System.out.println("größe: " + this.size);
 //		System.out.println("first: " + this.firstNode.element);
 //		System.out.println("last: " + this.lastNode.element);
-		
-		
+
 		return found.element;
 	}
 

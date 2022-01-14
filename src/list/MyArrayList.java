@@ -1,32 +1,37 @@
 // wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 package list;
 
+import java.time.LocalDate;
+
+import family.Person;
+import family.Person.Geschlecht;
+
 public class MyArrayList<T> implements MyList<T> {
 	private T[] array;
-	private int size = 0; // amount of elements in array	
-	
+	private int size = 0; // amount of elements in array
+
 	@SuppressWarnings("unchecked")
 	public MyArrayList() {
-		this.array = (T[])new Object[10];
+		this.array = (T[]) new Object[10];
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public MyArrayList(final int length) {
-		this.array = (T[])new Object[length];
+		this.array = (T[]) new Object[length];
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public MyArrayList(final T... elements) {
 		int elementsLength = elements.length;
-		this.array = (T[])new Object[elementsLength];
+		this.array = (T[]) new Object[elementsLength];
 		System.arraycopy(elements, 0, this.array, this.size, elementsLength);
 		this.size += elementsLength;
 	}
 
 	@Override
 	public void listToConsole() {
-		for(int i = 0; i < this.size; i++)
-		System.out.println(array[i]);
+		for (int i = 0; i < this.size; i++)
+			System.out.println(array[i]);
 	}
 
 	@Override
@@ -41,15 +46,15 @@ public class MyArrayList<T> implements MyList<T> {
 		}
 		throw new IllegalArgumentException(String.format("index out of range: %s", idx));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T element) {
 		int arrayLength = this.array.length;
-		if((this.size + 1) > arrayLength) {
+		if ((this.size + 1) > arrayLength) {
 			arrayLength += (arrayLength / 2);
-			
-			final T[] tmp = (T[])new Object[arrayLength];
+
+			final T[] tmp = (T[]) new Object[arrayLength];
 			for (int i = 0; i < this.size; ++i) {
 				tmp[i] = this.array[i];
 			}
@@ -58,7 +63,7 @@ public class MyArrayList<T> implements MyList<T> {
 		this.array[this.size] = element;
 		this.size++;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void checkSize(final int n) { // für array hinzufügen
 		if ((this.size + n) > this.array.length) {
@@ -66,12 +71,12 @@ public class MyArrayList<T> implements MyList<T> {
 			while ((this.size + n) > al) {
 				al += (al / 2);
 			}
-			final T[] tmp = (T[])new Object[al];
+			final T[] tmp = (T[]) new Object[al];
 			System.arraycopy(tmp, 0, this.array, 0, this.size);
 			this.array = tmp;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(final T... elements) {
@@ -89,59 +94,40 @@ public class MyArrayList<T> implements MyList<T> {
 		this.size += elementsLength;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public T removeAt(final int idx) {
+		T element = get(idx);
+
+		T[] tmp = (T[]) new Object[this.array.length - 1];
+
+		System.arraycopy(this.array, 0, tmp, 0, idx);
+		System.arraycopy(this.array, (idx + 1), tmp, idx, (this.size - idx));
+
+		this.array = tmp;
+		this.size -= 1;
+		return element;
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Deleted remove(final T element) {
 		int gefunden = 0;
-		int tmpSize = this.size; 
 		for (int i = 0; i < this.size; i++) {
 			if (array[i].equals(element)) {
 				gefunden++;
-				tmpSize--;
+				removeAt(i);
 			}
 		}
-
-		
-		T[] tmp = (T[])new Object[this.array.length - gefunden];
-		for (int i = 0, j = 0; i < this.size; i++, j++) {
-			if (!array[i].equals(element)) {
-				tmp[j] = array[i];
-			} else {
-				j--;
-			}
-		}
-		this.size = tmpSize;
-		this.array = tmp;
 		return new Deleted(element, gefunden);
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public T removeAt(final int idx) {
-		
-		T ret = (T)new Object();
-		
-		T[] tmp = (T[])new Object[this.array.length - 1];
-		for (int i = 0, j = 0; i < this.size; i++, j++) {
-			if (this.array[i] != array[idx]) {
-				tmp[j] = this.array[i];
-			} else {
-				j--;
-				ret = array[idx];
-			}
-		}
-		this.array = tmp;
-		this.size -= 1;
-		return ret;
-	}
-
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Deleted[] removeAll(final T[] elements) {
 		Deleted[] ret = new Deleted[elements.length];
 		int i = 0;
-		for (T value : elements) {			
+		for (T value : elements) {
 			ret[i] = remove(value);
 			i++;
 		}
