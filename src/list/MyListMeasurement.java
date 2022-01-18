@@ -1,19 +1,29 @@
 package list;
 
+import java.time.LocalDate;
 import java.util.Random;
 import java.util.function.Consumer;
 
 import de.impaq.german_names.RandomName;
 import de.impaq.german_names.RandomName.Sex;
+import family.Person;
+import family.Person.Geschlecht;
 
 public class MyListMeasurement {	
 	
 	public static void main(final String... args) {		
-		System.err.println("My List:");
-		MyList<RandomName> ml = new MyArrayList<>();		
-		measureMyList(ml);
-		ml = new MyLinkedList<>();
-		measureMyList(ml);
+		MyList<RandomName> l = new MyArrayList<>();
+		insert(l);
+		
+		for(int i = 0; i<12; i++) {
+		System.out.println(l.get(i));
+		}
+		sort(l);
+		System.out.println();
+		for(int i = 0; i<12; i++) {
+			System.out.println(l.get(i));
+		}
+
 	}
 	
 	public static void measureMyList(final MyList<RandomName> l) {
@@ -34,7 +44,7 @@ public class MyListMeasurement {
 	}
 	
 	private static void insert(final MyList<RandomName> l) { // 125000 zufällige zur liste hinzufügen
-		for(int i = 0; i < 125000; ++i) {
+		for(int i = 0; i < 20; ++i) {
 			l.add(new RandomName(Sex.ANY));
 		}
 	}
@@ -51,6 +61,10 @@ public class MyListMeasurement {
 		for(int i = 0; i < size; ++i) {
 			l.get(random.nextInt(size));
 		}
+	}
+	
+	private static void sort(final MyList<RandomName> l) {		
+		ListUtils.sort(l, RandomName.compareByFirstName());
 	}
 	
 	private static long measure(final Consumer<MyList<RandomName>> fct, final MyList<RandomName> l) { // zeitmesser

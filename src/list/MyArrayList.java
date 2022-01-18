@@ -1,11 +1,6 @@
 // wenn arrayGröße nicht reicht, soll die größe um 50% erhöht werden
 package list;
 
-import java.time.LocalDate;
-
-import family.Person;
-import family.Person.Geschlecht;
-
 public class MyArrayList<T> implements MyList<T> {
 	private T[] array;
 	private int size = 0; // amount of elements in array
@@ -101,8 +96,7 @@ public class MyArrayList<T> implements MyList<T> {
 
 		T[] tmp = (T[]) new Object[this.array.length - 1];
 
-		System.arraycopy(this.array, 0, tmp, 0, idx);
-		System.arraycopy(this.array, (idx + 1), tmp, idx, (this.size - idx));
+		System.arraycopy(this.array, (idx + 1), this.array, idx, (this.size - idx));
 
 		this.array = tmp;
 		this.size -= 1;
@@ -138,6 +132,12 @@ public class MyArrayList<T> implements MyList<T> {
 	public void clear() {
 		this.size = 0;
 	}
+
+	@Override
+	public void set(T element, int idx) {
+		this.array[idx] = element;		
+	}
+	
 
 	// sortieren ------------------------------------
 //	public void sortArray() {
@@ -209,15 +209,18 @@ public class MyArrayList<T> implements MyList<T> {
 //	}
 //
 //	public void simpleSortArray() {
-//		int a;
-//		for (int z = 0; z < this.array.length; z++) {
-//			for (int i = 0; i < this.array.length - 1; i++) {
-//				if (array[i] > array[i + 1] && array[i + 1] != 0) {
-//					a = array[i];
-//					array[i] = array[i + 1];
-//					array[i + 1] = a;
-//				}
-//			}
-//		}
+//		boolean sorted = false;
+//	    int tmp;
+//	    while(!sorted) {
+//	        sorted = true;
+//	        for (int i = 0; i < this.array.length - 1; i++) {
+//	            if (this.array[i] > this.array[i+1] && this.array[i+1] != 0) {
+//	                tmp = this.array[i];
+//	                this.array[i] = this.array[i+1];
+//	                this.array[i+1] = tmp;
+//	                sorted = false;
+//	            }
+//	        }
+//	    }
 //	}
 }

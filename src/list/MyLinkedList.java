@@ -154,4 +154,12 @@ public class MyLinkedList<T> implements MyList<T> {
 		}
 		System.out.println(found.element);
 	}
+
+	@Override
+	public void set(T element, int idx) {
+		getInternal(idx).element = element;
+	}
+	
+	
+	
 }
