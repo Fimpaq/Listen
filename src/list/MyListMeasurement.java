@@ -59,7 +59,7 @@ public class MyListMeasurement {
 			System.out.println(al.get(i));
 		}
 		
-		ListUtils.mSort(al);
+		ListUtils.sort(al, Person.compareByVorname());
 
 		for(int i=0; i<al.getSize(); i++) {
 			System.out.println(al.get(i));
