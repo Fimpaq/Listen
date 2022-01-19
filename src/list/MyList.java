@@ -40,7 +40,7 @@ class ListUtils {
 		System.out.println("sortiert");
 	}
 
-	private static int doCompare(final Object lhs, final Object rhs, final Comparator<Object> cmp) {
+	private static int doCompare(final Object lhs, final Object rhs, final Comparator<Object> cmp) { // comparator
 		return cmp != null ? cmp.compare(lhs, rhs) : ((Comparable) lhs).compareTo(rhs);
 	}
 
@@ -62,71 +62,63 @@ class ListUtils {
 		System.out.println("sortiert");
 	}
 
-	public static <T extends Comparable<T>> void mSort(final MyList<T> l) {
-		T[] array = (T[]) new Comparable[l.getSize()];
-		for (int i = 0; i < l.getSize(); i++) {
-			array[i] = l.get(i);
-		}
 
-		mergeSort(array);
-		System.out.println("sortiert");
-	}
-
-	private static <T extends Comparable<T>> void mergeSort(final T[] array) {
-		int startLength = array.length;
+	
+	public static <T extends Comparable<T>> void mergeSort(final MyList<T> list) { // mergeSort
+		int startLength = list.getSize();
 
 		if (startLength < 2) {
 			return;
 		}
 
 		int middel = startLength / 2;
-		T[] leftArray = (T[]) new Comparable[middel];
-		T[] rightArray = (T[]) new Comparable[startLength - middel];
+		MyList<T> leftArray = new MyArrayList<>();
+		MyList<T> rightArray = new MyArrayList<>();
 
 		for (int i = 0; i < middel; i++) {
-			leftArray[i] = array[i];
+			leftArray.set(list.get(i), i);
 		}
 		for (int i = middel, j = 0; i < startLength; i++, j++) {
-			rightArray[j] = array[i];
+			rightArray.set(list.get(i), j);
 		}
 
 		mergeSort(leftArray);
 		mergeSort(rightArray);
 
-		merge(array, rightArray, leftArray);
+		merge(list, rightArray, leftArray);
 		
 	}
 
-	private static <T extends Comparable<T>> void merge(final T[] input, final T[] rightArray, final T[] leftArray) {
-		int leftLength = leftArray.length;
-		int rightLength = rightArray.length;
+	private static <T extends Comparable<T>> void merge(final MyList<T> input, final MyList<T> rightArray, final MyList<T> leftArray) {
+		int leftLength = leftArray.getSize();
+		int rightLength = rightArray.getSize();
 
 		int i = 0, j = 0, k = 0;
 
 		while (i < leftLength && j < rightLength) {
-			if (doCompare(leftArray[i], rightArray[j], null) <= 0) { // ruft doCompare
-				input[k] = leftArray[i];
+			if (doCompare(leftArray.get(i), rightArray.get(j), null) <= 0) {
+				input.set(leftArray.get(i), k);
 				i++;
 			} else {
-				input[k] = rightArray[j];
+				input.set(rightArray.get(j), k);
 				j++;
 			}
 			k++;
 		}
 
 		while (i < leftLength) {
-			input[k] = leftArray[i];
+			input.set(leftArray.get(i), k);
 			i++;
 			k++;
 		}
 		while (j < rightLength) {
-			input[k] = rightArray[j];
+			input.set(rightArray.get(j), k);
 			j++;
 			k++;
 		}
 	}
 
-	public static <T> void shuffle(final MyList<T> l) {
+	public static <T> void shuffle(final MyList<T> l) { // shuffle
 		int size = l.getSize();
 		Random random = new Random();
 
