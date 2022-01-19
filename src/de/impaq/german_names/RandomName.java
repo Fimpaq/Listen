@@ -48,12 +48,15 @@ public class RandomName implements Comparable<RandomName>{
 	public String toString() {
 		return getFullName();
 	}
-
+	
+	
+	
 	@Override
 	public int compareTo(RandomName o) {
 		return 1* this.firstName.compareTo(o.getFirstName()) + //
 				100* this.name.compareTo(o.getName());
 	}
+	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Comparator<RandomName> compareByFirstName() {

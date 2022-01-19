@@ -116,7 +116,7 @@ public class MyArrayList<T> implements MyList<T> {
 		return new Deleted(element, gefunden);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public Deleted[] removeAll(final T[] elements) {
 		Deleted[] ret = new Deleted[elements.length];
@@ -137,90 +137,5 @@ public class MyArrayList<T> implements MyList<T> {
 	public void set(T element, int idx) {
 		this.array[idx] = element;		
 	}
-	
 
-	// sortieren ------------------------------------
-//	public void sortArray() {
-//		mergeSort(this.array);
-//
-//		int[] tmp = new int[this.array.length];
-//
-//		int i = 0;
-//		for (int num : this.array) {
-//			if (num != 0) {
-//				tmp[i] = num;
-//				i++;
-//			}
-//		}
-//		this.array = tmp;
-//	}
-//
-//	private void mergeSort(final int[] input) {
-//		int startLength = input.length;
-//
-//		if (startLength < 2) {
-//			return;
-//		}
-//
-//		int middel = startLength / 2;
-//		int[] leftArray = new int[middel];
-//		int[] rightArray = new int[startLength - middel];
-//
-//		for (int i = 0; i < middel; i++) {
-//			leftArray[i] = input[i];
-//		}
-//		for (int i = middel, j = 0; i < startLength; i++, j++) {
-//			rightArray[j] = input[i];
-//		}
-//
-//		mergeSort(leftArray);
-//		mergeSort(rightArray);
-//
-//		merge(input, rightArray, leftArray);
-//	}
-//
-//	private void merge(final int[] input, final int[] rightArray, final int[] leftArray) {
-//		int leftLength = leftArray.length;
-//		int rightLength = rightArray.length;
-//
-//		int i = 0, j = 0, k = 0;
-//
-//		while (i < leftLength && j < rightLength) {
-//			if (leftArray[i] <= rightArray[j]) {
-//				input[k] = leftArray[i];
-//				i++;
-//			} else {
-//				input[k] = rightArray[j];
-//				j++;
-//			}
-//			k++;
-//		}
-//
-//		while (i < leftLength) {
-//			input[k] = leftArray[i];
-//			i++;
-//			k++;
-//		}
-//		while (j < rightLength) {
-//			input[k] = rightArray[j];
-//			j++;
-//			k++;
-//		}
-//	}
-//
-//	public void simpleSortArray() {
-//		boolean sorted = false;
-//	    int tmp;
-//	    while(!sorted) {
-//	        sorted = true;
-//	        for (int i = 0; i < this.array.length - 1; i++) {
-//	            if (this.array[i] > this.array[i+1] && this.array[i+1] != 0) {
-//	                tmp = this.array[i];
-//	                this.array[i] = this.array[i+1];
-//	                this.array[i+1] = tmp;
-//	                sorted = false;
-//	            }
-//	        }
-//	    }
-//	}
 }
