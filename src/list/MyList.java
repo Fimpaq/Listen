@@ -61,60 +61,58 @@ class ListUtils {
 		}
 		System.out.println("sortiert");
 	}
-
-
 	
-	public static <T extends Comparable<T>> void mergeSort(final MyList<T> list) { // mergeSort
-		int startLength = list.getSize();
-
-		if (startLength < 2) {
-			return;
-		}
-
-		int middel = startLength / 2;
-		MyList<T> leftArray = new MyArrayList<>();
-		MyList<T> rightArray = new MyArrayList<>();
-
-		for (int i = 0; i < middel; i++) {
-			leftArray.set(list.get(i), i);
-		}
-		for (int i = middel, j = 0; i < startLength; i++, j++) {
-			rightArray.set(list.get(i), j);
-		}
-
-		mergeSort(leftArray);
-		mergeSort(rightArray);
-
-		merge(list, rightArray, leftArray);
-		
+	public static <T extends Comparable> void sortGivenArray(final MyList<T> list) {
+		divide(0, list.getSize() - 1, list);
 	}
 
-	private static <T extends Comparable<T>> void merge(final MyList<T> input, final MyList<T> rightArray, final MyList<T> leftArray) {
-		int leftLength = leftArray.getSize();
-		int rightLength = rightArray.getSize();
+	public static <T extends Comparable> void divide(final int startIndex, final int endIndex, final MyList<T> list) {
 
-		int i = 0, j = 0, k = 0;
+		if (startIndex < endIndex && (endIndex - startIndex) >= 1) {
+			int mid = (endIndex + startIndex) / 2;
+			divide(startIndex, mid, list);
+			divide(mid + 1, endIndex, list);
 
-		while (i < leftLength && j < rightLength) {
-			if (doCompare(leftArray.get(i), rightArray.get(j), null) <= 0) {
-				input.set(leftArray.get(i), k);
-				i++;
+
+			merger(startIndex, mid, endIndex, list);
+		}
+	}
+
+	public static <T extends Comparable> void merger(final int startIndex, final int midIndex, final int endIndex, final MyList<T> list) {
+
+
+		MyList<T> mergedSortedArray = new MyArrayList<>();
+
+		int leftIndex = startIndex;
+		int rightIndex = midIndex + 1;
+
+		while (leftIndex <= midIndex && rightIndex <= endIndex) {
+			if ((list.get(leftIndex)).compareTo(list.get(rightIndex)) <= 0) { // if (list.get(leftIndex) <= list.get(rightIndex)) {
+				mergedSortedArray.add(list.get(leftIndex));
+				leftIndex++;
 			} else {
-				input.set(rightArray.get(j), k);
-				j++;
+				mergedSortedArray.add(list.get(rightIndex));
+				rightIndex++;
 			}
-			k++;
 		}
 
-		while (i < leftLength) {
-			input.set(leftArray.get(i), k);
-			i++;
-			k++;
+
+		while (leftIndex <= midIndex) {
+			mergedSortedArray.add(list.get(leftIndex));
+			leftIndex++;
 		}
-		while (j < rightLength) {
-			input.set(rightArray.get(j), k);
+
+		while (rightIndex <= endIndex) {
+			mergedSortedArray.add(list.get(rightIndex));
+			rightIndex++;
+		}
+
+		int i = 0;
+		int j = startIndex;
+
+		while (i < mergedSortedArray.getSize()) {
+			list.set(mergedSortedArray.get(i++), j);
 			j++;
-			k++;
 		}
 	}
 
