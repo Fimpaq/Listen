@@ -60,7 +60,7 @@ public class MyListMeasurement {
 		}
 		System.out.println();
 		
-		ListUtils.sortGivenArray(al);
+		ListUtils.mergeSort(al);
 
 		for(int i=0; i<al.getSize(); i++) {
 			System.out.println(al.get(i));
